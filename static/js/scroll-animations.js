@@ -9,6 +9,7 @@ class ScrollAnimations {
         this.setupParallaxEffects();
         this.setupScrollTriggers();
         this.setupJourneyBackgroundChange();
+        this.setupNavigationHighlight();
     }
 
     setupScrollObserver() {
@@ -224,6 +225,80 @@ class ScrollAnimations {
                 document.documentElement.style.setProperty('--bg-color', '#0f172a');
             }
         });
+    }
+
+    setupNavigationHighlight() {
+        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+        const sections = document.querySelectorAll('section[id]');
+        let clickTimeout = null;
+        let currentActive = null;
+        
+        // Helper function to update active state
+        const updateActiveState = (targetId) => {
+            if (currentActive === targetId) return; // Don't update if already active
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            const activeLink = document.querySelector(`.nav-links a[href="#${targetId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+                currentActive = targetId;
+            }
+        };
+        
+        // Add click handlers for immediate active state update
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href').substring(1);
+                updateActiveState(targetId);
+                
+                // Prevent observer from overriding for a longer time
+                if (clickTimeout) clearTimeout(clickTimeout);
+                clickTimeout = setTimeout(() => {
+                    clickTimeout = null;
+                }, 2000);
+            });
+        });
+        
+        // Use scroll-based approach instead of intersection observer
+        let ticking = false;
+        
+        const checkActiveSection = () => {
+            if (clickTimeout) return;
+            
+            const scrollPosition = window.scrollY + window.innerHeight / 3; // Check 1/3 down from top
+            
+            let activeSection = null;
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.scrollY;
+                const sectionBottom = sectionTop + rect.height;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    activeSection = section.id;
+                }
+            });
+            
+            if (activeSection && activeSection !== currentActive) {
+                updateActiveState(activeSection);
+            }
+            
+            ticking = false;
+        };
+        
+        const onScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(checkActiveSection);
+                ticking = true;
+            }
+        };
+        
+        window.addEventListener('scroll', onScroll);
+        
+        // Initial check
+        checkActiveSection();
     }
 }
 

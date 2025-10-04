@@ -14,7 +14,10 @@
                 <h1>Your Name</h1>
             </div>
             <ul class="nav-links">
-                <li><a href="/">Portfolio</a></li>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#timeline">Journey</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="/blog">Blog</a></li>
             </ul>
         </nav>
@@ -22,15 +25,30 @@
 
     <main class="main">
         <!-- Hero Section -->
-        <section class="hero">
+        <section id="hero" class="hero">
             <div class="hero-content">
-                <h1 class="hero-title">Noah Schlickeisen</h1>
-                <p class="hero-subtitle">Software Developer</p>
+                <h1 class="hero-name">
+                    <span class="terminal-line">
+                        <span class="terminal-prompt">$</span> 
+                        <span class="typewriter" id="whoami-command"></span>
+                        <span class="cursor" id="cursor1">_</span>
+                    </span>
+                    <div class="terminal-output" id="name-output" style="display: none;">Noah Schlickeisen</div>
+                </h1>
+                <div class="hero-3d" id="hero-3d-container"></div>
+                <p class="hero-role">
+                    <span class="terminal-line">
+                        <span class="terminal-prompt">$</span> 
+                        <span class="typewriter" id="role-command"></span>
+                        <span class="cursor" id="cursor2" style="display: none;">_</span>
+                    </span>
+                    <div class="terminal-output" id="role-output" style="display: none;">Software Developer</div>
+                </p>
             </div>
         </section>
 
         <!-- Portfolio Timeline -->
-        <section class="portfolio-timeline">
+        <section id="timeline" class="portfolio-timeline">
             <div class="container">
                 <h2 class="section-title">My Journey</h2>
                 <div class="timeline">
@@ -43,7 +61,6 @@
                             <p>Bachelor's in Computer Science with a minor in Mathematics</p>
                             <small style="color: #94a3b8; font-size: 0.9rem;">Click for details</small>
                         </div>
-                        <div class="stage-3d" id="stage-3d-0"></div>
                     </div>
                     <div class="timeline-item" data-stage="1" data-color="#10b981">
                         <div class="timeline-content" 
@@ -54,7 +71,6 @@
                             <p>Director overseeing curriculum and student engagement</p>
                             <small style="color: #94a3b8; font-size: 0.9rem;">Click for details</small>
                         </div>
-                        <div class="stage-3d" id="stage-3d-1"></div>
                     </div>
                     <div class="timeline-item" data-stage="2" data-color="#f59e0b">
                         <div class="timeline-content" 
@@ -65,7 +81,6 @@
                             <p>Full Stack Developer for mushroom marketplace and community</p>
                             <small style="color: #94a3b8; font-size: 0.9rem;">Click for details</small>
                         </div>
-                        <div class="stage-3d" id="stage-3d-2"></div>
                     </div>
                     
                     <div class="timeline-item" data-stage="3" data-color="#8b5cf6">
@@ -77,28 +92,113 @@
                             <p>QA Test Automation Engineer specializing in automated testing solutions</p>
                             <small style="color: #94a3b8; font-size: 0.9rem;">Click for details</small>
                         </div>
-                        <div class="stage-3d" id="stage-3d-3"></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Skills Section -->
-        <section class="skills">
+                <!-- Skills Section -->
+        <section id="skills" class="skills">
             <div class="container">
                 <h2 class="section-title">Skills & Technologies</h2>
                 <div class="skills-grid">
                     <div class="skill-item">
-                        <div class="skill-3d" data-skill="python"></div>
-                        <h3>Python</h3>
+                        <span class="skill-text">Python</span>
                     </div>
                     <div class="skill-item">
-                        <div class="skill-3d" data-skill="javascript"></div>
-                        <h3>JavaScript</h3>
+                        <span class="skill-text">JavaScript</span>
                     </div>
                     <div class="skill-item">
-                        <div class="skill-3d" data-skill="web"></div>
-                        <h3>Web Development</h3>
+                        <span class="skill-text">FastAPI</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-text">React</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-text">Three.js</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-text">HTML/CSS</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-text">Node.js</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-text">Web Development</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-text">API Development</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-text">Database Management</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-text">Test Automation</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-text">Computer Vision</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+                <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-item" data-project="shroomspy">
+                        <div class="project-3d" data-model="mushroom-model.glb"></div>
+                        <div class="project-content">
+                            <h3>Shroom-Spy</h3>
+                            <p>Computer vision application for mushroom identification using deep learning and image processing.</p>
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Computer Vision</span>
+                                <span class="tag">Deep Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item" data-project="portfolio">
+                        <div class="project-3d" data-model="react-model.glb"></div>
+                        <div class="project-content">
+                            <h3>3D Portfolio Website</h3>
+                            <p>Interactive portfolio website built with FastAPI, Three.js, and HTMX featuring 3D animations.</p>
+                            <div class="project-tags">
+                                <span class="tag">FastAPI</span>
+                                <span class="tag">Three.js</span>
+                                <span class="tag">HTMX</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item" data-project="automation">
+                        <div class="project-3d" data-model="work-model.glb"></div>
+                        <div class="project-content">
+                            <h3>Test Automation Suite</h3>
+                            <p>Comprehensive test automation framework for web applications with CI/CD integration.</p>
+                            <div class="project-tags">
+                                <span class="tag">Selenium</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">CI/CD</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-item" data-project="learning">
+                        <div class="project-3d" data-model="education-model.glb"></div>
+                        <div class="project-content">
+                            <h3>Learning Management System</h3>
+                            <p>Full-stack web application for course management and student progress tracking.</p>
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Node.js</span>
+                                <span class="tag">MongoDB</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,6 +223,7 @@
 
     <script type="module" src="/js/portfolio-3d.js"></script>
     <script src="/js/scroll-animations.js"></script>
+    <script src="/js/terminal-typewriter.js"></script>
     
     <script>
         // Modal functionality with mock data
@@ -195,7 +296,7 @@
                         <p class="stage-description" style="margin: 0 0 2rem 0; color: var(--text-color); font-size: 1.1rem; line-height: 1.6;">${stage.description}</p>
                         
                         <h3 style="color: var(--text-color); margin: 0 0 1.5rem 0; font-size: 1.3rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5rem;">Key Highlights</h3>
-                        <div class="stage-details" style="margin: 0; display: flex; flex-direction: column;">
+                        <div  style="margin: 0; display: flex; flex-direction: column;">
                             ${stage.details.map((detail, index) => `
                                 <div style="
                                     display: block; 
@@ -206,6 +307,7 @@
                                     color: var(--text-color);
                                     line-height: 1.6;
                                     clear: both;
+                                    background: transparent;
                                     
                                 ">
                                     <span style="

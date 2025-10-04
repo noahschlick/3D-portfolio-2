@@ -9,9 +9,98 @@ class Portfolio3D {
     }
 
     init() {
-        // this.createHeroScene(); // Disabled hero 3D scene
-        this.createTimelineScenes();
-        this.createSkillScenes();
+        this.createHeroScene();
+        // this.createTimelineScenes(); // Removed - timeline no longer has 3D objects
+        this.createProjectScenes();
+        // Note: createSkillScenes() removed since skills no longer have 3D elements
+    }
+
+    createHeroScene() {
+        const heroContainer = document.getElementById('hero-3d-container');
+        if (!heroContainer) return;
+
+        const scene = new THREE.Scene();
+        // Use fixed larger dimensions
+        const containerWidth = 1000;
+        const containerHeight = 400;
+        
+        const camera = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(containerWidth, containerHeight);
+        renderer.setClearColor(0x000000, 0);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        heroContainer.appendChild(renderer.domElement);
+
+        // Enhanced lighting setup for hero
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0x64ffda, 1.2);
+        directionalLight.position.set(5, 10, 5);
+        directionalLight.castShadow = true;
+        scene.add(directionalLight);
+
+        const pointLight1 = new THREE.PointLight(0x00ff88, 0.8, 100);
+        pointLight1.position.set(-10, 5, 5);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0x2563eb, 0.6, 100);
+        pointLight2.position.set(10, -5, -5);
+        scene.add(pointLight2);
+
+        camera.position.set(0, 0, 12);
+
+        // Load the retro computer model
+        const loader = new GLTFLoader();
+        loader.load('/assets/retro-computer-model.glb', (gltf) => {
+            const model = gltf.scene;
+            
+            // Scale and position the retro computer
+            model.scale.setScalar(5.0);
+            model.position.set(0, -1, 0);
+            scene.add(model);
+
+            // Store scene data for animation
+            const sceneData = {
+                scene,
+                camera,
+                renderer,
+                model,
+                animate: () => {
+                    if (model) {
+                        // Slow rotation for professional look
+                        model.rotation.y += 0.005;
+                        
+                        // Subtle floating animation
+                        model.position.y = -1 + Math.sin(Date.now() * 0.001) * 0.1;
+                    }
+                    renderer.render(scene, camera);
+                }
+            };
+            
+            this.scenes.set('hero', sceneData);
+            
+            // Start animation loop
+            const animate = () => {
+                requestAnimationFrame(animate);
+                sceneData.animate();
+            };
+            animate();
+            
+        }, undefined, (error) => {
+            console.error('Error loading retro computer model:', error);
+        });
+
+        // Handle window resize - maintain fixed dimensions for now
+        window.addEventListener('resize', () => {
+            const newWidth = 1000;
+            const newHeight = 400;
+            camera.aspect = newWidth / newHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(newWidth, newHeight);
+        });
     }
 
     createTimelineScenes() {
@@ -200,6 +289,87 @@ class Portfolio3D {
             };
             
             this.scenes.set(`timeline-${index}`, sceneData);
+        });
+    }
+
+    createProjectScenes() {
+        const projectItems = document.querySelectorAll('.project-3d');
+        console.log('Found project items:', projectItems.length);
+        
+        projectItems.forEach((container, index) => {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / 200, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            
+            renderer.setSize(container.offsetWidth, 200);
+            renderer.setClearColor(0x000000, 0);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+
+            // Lighting setup
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0x64ffda, 1);
+            directionalLight.position.set(5, 5, 5);
+            directionalLight.castShadow = true;
+            scene.add(directionalLight);
+
+            const pointLight = new THREE.PointLight(0x00ff88, 0.5, 100);
+            pointLight.position.set(-5, 5, 0);
+            scene.add(pointLight);
+
+            camera.position.z = 5;
+
+            // Load the GLB model based on data-model attribute
+            const modelFile = container.dataset.model;
+            if (modelFile) {
+                const loader = new GLTFLoader();
+                loader.load(`/assets/${modelFile}`, (gltf) => {
+                    const model = gltf.scene;
+                    
+                    // Scale model based on filename
+                    const scaleMap = {
+                        'mushroom-model.glb': 2.5,
+                        'react-model.glb': 1.8,
+                        'work-model.glb': 2.0,
+                        'education-model.glb': 2.2
+                    };
+                    
+                    const scale = scaleMap[modelFile] || 2.0;
+                    model.scale.setScalar(scale);
+                    
+                    model.position.set(0, 0, 0);
+                    scene.add(model);
+
+                    // Store scene data for animation
+                    const sceneData = {
+                        scene,
+                        camera,
+                        renderer,
+                        model,
+                        animate: () => {
+                            if (model) {
+                                model.rotation.y += 0.01;
+                            }
+                            renderer.render(scene, camera);
+                        }
+                    };
+                    
+                    this.scenes.set(`project-${index}`, sceneData);
+                    
+                    // Start animation loop
+                    const animate = () => {
+                        requestAnimationFrame(animate);
+                        sceneData.animate();
+                    };
+                    animate();
+                    
+                }, undefined, (error) => {
+                    console.error('Error loading project model:', error);
+                });
+            }
         });
     }
 
