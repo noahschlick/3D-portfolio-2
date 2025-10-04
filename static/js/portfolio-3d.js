@@ -52,8 +52,8 @@ class Portfolio3D {
             // Map stages to GLB files
             const modelMap = {
                 0: 'education-model.glb',
-                1: 'work-model.glb', 
-                2: 'current-model.glb',
+                1: 'icode-model.glb', 
+                2: 'react-model.glb', // Will be handled by separate containers
                 3: 'work-model.glb'  // Use work model for the new test automation stage
             };
             
@@ -61,44 +61,122 @@ class Portfolio3D {
             const scaleMap = {
                 'education-model.glb': 1.2,
                 'work-model.glb': 0.6,
-                'current-model.glb': 0.6
+                'current-model.glb': 0.6,
+                'react-model.glb': 0.8,  // Bigger React model
+                'mushroom-model.glb': 1.0,  // Much bigger mushroom model
+                'icode-model.glb': 0.8
             };
             
-            const modelFile = modelMap[index] || 'education-model.glb';
-            const modelScale = scaleMap[modelFile] || 0.8; // Default scale if not found
+            const modelFiles = modelMap[index] || 'education-model.glb';
+            const filesToLoad = Array.isArray(modelFiles) ? modelFiles : [modelFiles];
             
-            // Try to load GLB model
-            console.log(`Attempting to load ${modelFile} for stage ${index} with scale ${modelScale}`);
-            loader.load(
-                `/assets/${modelFile}`,
-                (gltf) => {
-                    const model = gltf.scene;
-                    model.scale.setScalar(modelScale);
-                    
-                    // Apply specific positioning and rotations based on model
-                    if (modelFile === 'education-model.glb') {
-                        model.position.set(0, 0.5, 0); // Raise education model higher
-                        // Tilt education model backward vertically (rotate around X-axis)
-                        model.rotation.x = Math.PI / 6; // +30 degrees backward tilt
-                    } else {
-                        model.position.set(0, -0.5, 0); // Lower other models
+            // Load all models for this stage
+            filesToLoad.forEach((modelFile, modelIndex) => {
+                const modelScale = scaleMap[modelFile] || 0.8; // Default scale if not found
+                
+                console.log(`Attempting to load ${modelFile} for stage ${index} with scale ${modelScale}`);
+                loader.load(
+                    `/assets/${modelFile}`,
+                    (gltf) => {
+                        const model = gltf.scene;
+                        model.scale.setScalar(modelScale);
+                        
+                        // Apply specific positioning and rotations based on model
+                        if (modelFile === 'education-model.glb') {
+                            model.position.set(0, 0.5, 0); // Raise education model higher
+                            // Tilt education model backward vertically (rotate around X-axis)
+                            model.rotation.x = Math.PI / 6; // +30 degrees backward tilt
+                        } else if (modelFile === 'react-model.glb') {
+                            model.position.set(0, 0.2, 0); // Raise React model higher
+                            model.rotation.y = Math.PI; // 180 degree rotation around Y-axis
+                            model.rotation.x = Math.PI / 12; // 15 degree tilt around X-axis
+                        } else if (modelFile === 'icode-model.glb') {
+                            // Create a group to hold the model for proper rotation
+                            const modelGroup = new THREE.Group();
+                            
+                            // Center the model geometry within the group
+                            const box = new THREE.Box3().setFromObject(model);
+                            const center = box.getCenter(new THREE.Vector3());
+                            model.position.sub(center); // Center model within group
+                            
+                            // Add model to group and position group in scene
+                            modelGroup.add(model);
+                            modelGroup.position.set(0, 0, 0); // Keep group centered in screen
+                            
+                            // Replace model reference with group for rotation
+                            scene.add(modelGroup);
+                            mesh = modelGroup; // This will rotate instead of the model directly
+                            
+                            // Skip the normal scene.add(model) later
+                            return;
+                        } else if (filesToLoad.length > 1) {
+                            // Position multiple models side by side with closer spacing
+                            const spacing = 1.2; // Reduced spacing to keep both in frame
+                            const totalWidth = (filesToLoad.length - 1) * spacing;
+                            const startX = -totalWidth / 2;
+                            
+                            // Position models side by side at same depth
+                            model.position.set(startX + (modelIndex * spacing), -0.5, 0);
+                        } else {
+                            model.position.set(0, -0.5, 0); // Lower other models
+                        }
+                        
+                        // Handle mushroom model coloring and lighting specifically
+                        if (modelFile === 'mushroom-model.glb') {
+                            // Add dedicated spotlight for the mushroom
+                            const mushroomSpotlight = new THREE.SpotLight(0xffffff, 2.0);
+                            mushroomSpotlight.position.set(
+                                model.position.x + 1, 
+                                model.position.y + 2, 
+                                model.position.z + 1
+                            );
+                            mushroomSpotlight.target = model;
+                            mushroomSpotlight.angle = Math.PI / 4;
+                            mushroomSpotlight.penumbra = 0.3;
+                            scene.add(mushroomSpotlight);
+                            
+                            // Traverse the model and force mushroom colors
+                            let meshIndex = 0;
+                            model.traverse((child) => {
+                                if (child.isMesh) {
+                                    // Force a new material with mushroom colors
+                                    const mushroomMaterial = new THREE.MeshPhongMaterial({
+                                        emissive: 0x000000,     // Black emissive glow
+                                        emissiveIntensity: 0.2,
+                                        shininess: 30
+                                    });
+                                    
+                                    // Simple alternating approach: first mesh is cap, second is stem
+                                    if (meshIndex === 0) {
+                                        mushroomMaterial.color = new THREE.Color(0xFF0000); // Red for cap
+                                        console.log('Applied red color to mushroom cap');
+                                    } else {
+                                        mushroomMaterial.color = new THREE.Color(0xFFFFFF); // White for stem
+                                        console.log('Applied white color to mushroom stem');
+                                    }
+                                    
+                                    child.material = mushroomMaterial;
+                                    meshIndex++;
+                                }
+                            });
+                        }
+                        
+                        scene.add(model);
+                        
+                        // Store reference for rotation (last loaded model will be the mesh reference)
+                        mesh = model;
+                        console.log(`Successfully loaded ${modelFile} for stage ${index} at scale ${modelScale}`);
+                    },
+                    (progress) => {
+                        const percent = progress.loaded / progress.total * 100;
+                        console.log(`Loading ${modelFile}: ${percent.toFixed(2)}%`);
+                    },
+                    (error) => {
+                        console.error(`Error loading ${modelFile}:`, error);
+                        console.log(`GLB file ${modelFile} not found - container will remain empty`);
                     }
-                    
-                    scene.add(model);
-                    
-                    // Store reference for rotation
-                    mesh = model;
-                    console.log(`Successfully loaded ${modelFile} for stage ${index} at scale ${modelScale}`);
-                },
-                (progress) => {
-                    const percent = progress.loaded / progress.total * 100;
-                    console.log(`Loading ${modelFile}: ${percent.toFixed(2)}%`);
-                },
-                (error) => {
-                    console.error(`Error loading ${modelFile}:`, error);
-                    console.log(`GLB file ${modelFile} not found - container will remain empty`);
-                }
-            );
+                );
+            });
 
             camera.position.z = 4; // Move camera back for better framing
 

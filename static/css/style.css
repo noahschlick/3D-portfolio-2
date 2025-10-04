@@ -79,31 +79,57 @@ body {
 .hero {
     height: 60vh;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    background-image: 
+        linear-gradient(to bottom, 
+            transparent 0%, 
+            transparent 50%, 
+            var(--bg-color) 100%),
+        url('../assets/schlick_cartoon_no_background.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .hero-content {
     text-align: center;
     z-index: 2;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        transparent 40%, 
+        rgba(0, 0, 0, 0.6) 60%, 
+        rgba(0, 0, 0, 0.95) 100%);
+    padding: 1rem 0;
+    border-radius: 0;
+    width: 100vw;
+    height: 100%;
+    margin-left: calc(-50vw + 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .hero-title {
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, #66d9ef, #f8f8f2);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: fadeInUp 1s ease-out;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
 }
 
 .hero-subtitle {
     font-size: 1.5rem;
     color: var(--secondary-color);
     animation: fadeInUp 1s ease-out 0.3s both;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
 }
 
 .hero-3d {
@@ -577,6 +603,12 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 770px) {
+    .timeline::before {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2.5rem;
@@ -586,20 +618,19 @@ body {
         font-size: 1.2rem;
     }
     
-    .timeline::before {
-        left: 20px;
-    }
-    
     .timeline-item {
         flex-direction: column !important;
-        padding-left: 60px;
+        padding-left: 0;
         margin-bottom: 3rem;
+        align-items: center;
     }
     
     .timeline-marker {
-        left: 20px;
-        top: 20px;
+        position: relative;
+        left: 0;
+        top: 0;
         transform: none;
+        margin-bottom: 1rem;
     }
     
     .timeline-content {
