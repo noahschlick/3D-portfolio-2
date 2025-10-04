@@ -8,6 +8,7 @@ class ScrollAnimations {
         this.setupScrollObserver();
         this.setupParallaxEffects();
         this.setupScrollTriggers();
+        this.setupJourneyBackgroundChange();
     }
 
     setupScrollObserver() {
@@ -167,6 +168,62 @@ class ScrollAnimations {
         setTimeout(() => {
             element.classList.remove(`animate-${animationType}`);
         }, 1000);
+    }
+
+    // Background color change based on journey section scroll
+    setupJourneyBackgroundChange() {
+        const journeySection = document.querySelector('.portfolio-timeline');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        if (!journeySection || timelineItems.length === 0) return;
+
+        const colors = [
+            [25, 35, 80],   // Education - vibrant blue [#192350]
+            [80, 25, 50],   // Work - deep red/magenta [#501932]
+            [25, 80, 70]    // Current - vibrant teal [#195046]
+        ];
+
+        // Helper function to interpolate between two colors
+        const interpolateColor = (color1, color2, factor) => {
+            const result = [];
+            for (let i = 0; i < 3; i++) {
+                result[i] = Math.round(color1[i] + factor * (color2[i] - color1[i]));
+            }
+            return `rgb(${result[0]}, ${result[1]}, ${result[2]})`;
+        };
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+            const journeyTop = journeySection.offsetTop;
+            const journeyBottom = journeyTop + journeySection.offsetHeight;
+            
+            // Only change background when in or near journey section
+            if (scrollY >= journeyTop - 300 && scrollY <= journeyBottom + 300) {
+                // Calculate scroll progress through the journey section
+                const journeyProgress = Math.max(0, Math.min(1, 
+                    (scrollY - journeyTop + 300) / (journeySection.offsetHeight + 600)
+                ));
+                
+                // Calculate which two colors to interpolate between
+                const colorIndex = journeyProgress * (colors.length - 1);
+                const currentColorIndex = Math.floor(colorIndex);
+                const nextColorIndex = Math.min(currentColorIndex + 1, colors.length - 1);
+                const factor = colorIndex - currentColorIndex;
+                
+                // Interpolate between the current and next color
+                const interpolatedColor = interpolateColor(
+                    colors[currentColorIndex],
+                    colors[nextColorIndex],
+                    factor
+                );
+                
+                // Apply the interpolated background color
+                document.documentElement.style.setProperty('--bg-color', interpolatedColor);
+            } else if (scrollY < journeyTop - 300) {
+                // Reset to original color before journey section
+                document.documentElement.style.setProperty('--bg-color', '#0f172a');
+            }
+        });
     }
 }
 

@@ -53,7 +53,8 @@ class Portfolio3D {
             const modelMap = {
                 0: 'education-model.glb',
                 1: 'work-model.glb', 
-                2: 'current-model.glb'
+                2: 'current-model.glb',
+                3: 'work-model.glb'  // Use work model for the new test automation stage
             };
             
             // Map model files to their desired scales

@@ -1,17 +1,16 @@
 <div class="stage-detail-card">
-    <h3>{{ stage.title }}</h3>
-    <span class="stage-period">{{ stage.period }}</span>
-    <p class="stage-description">{{ stage.description }}</p>
+    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">{{ stage.title }}</h2>
+    <span class="stage-period" style="color: var(--accent-color); font-weight: bold; font-size: 1.1rem;">{{ stage.period }}</span>
+    <p class="stage-description" style="margin: 1rem 0; color: var(--text-color); font-size: 1.1rem;">{{ stage.description }}</p>
     
     {% if stage.details %}
-    <ul class="stage-details-list">
+    <h3 style="color: var(--text-color); margin: 1.5rem 0 1rem 0;">Key Highlights:</h3>
+    <ul class="stage-details" style="list-style: none; padding: 0;">
         {% for detail in stage.details %}
-        <li>{{ detail }}</li>
+        <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+            <i style="color: var(--primary-color); margin-right: 0.5rem;">✓</i>{{ detail }}
+        </li>
         {% endfor %}
     </ul>
     {% endif %}
-    
-    <button class="close-details" onclick="document.getElementById('stage-details').innerHTML = '<p class=\'stage-hint\'>Click on any timeline item to see more details</p>'">
-        Close
-    </button>
 </div>

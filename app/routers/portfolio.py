@@ -11,8 +11,8 @@ async def get_portfolio_stage(request: Request, stage_id: int):
     stages = {
         0: {
             "title": "Education",
-            "period": "2018-2022",
-            "description": "Computer Science Degree",
+            "period": "2019-2022",
+            "description": "Bachelor's in Computer Science with a minor in Mathematics",
             "details": [
                 "Bachelor's in Computer Science",
                 "Focus on Web Development and AI",

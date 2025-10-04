@@ -35,28 +35,49 @@
                 <h2 class="section-title">My Journey</h2>
                 <div class="timeline">
                     <div class="timeline-item" data-stage="0" data-color="#3b82f6">
-                        <div class="timeline-content">
-                            <h3>Education</h3>
-                            <span class="timeline-period">2018-2022</span>
-                            <p>Computer Science Degree</p>
+                        <div class="timeline-content" 
+                             onclick="showStageDetails(0)"
+                             style="cursor: pointer;">
+                            <h3>Texas State University</h3>
+                            <span class="timeline-period">2019-2022</span>
+                            <p>Bachelor's in Computer Science with a minor in Mathematics</p>
+                            <small style="color: #94a3b8; font-size: 0.9rem;">Click for details</small>
                         </div>
                         <div class="stage-3d" id="stage-3d-0"></div>
                     </div>
                     <div class="timeline-item" data-stage="1" data-color="#10b981">
-                        <div class="timeline-content">
-                            <h3>First Job</h3>
+                        <div class="timeline-content" 
+                             onclick="showStageDetails(1)"
+                             style="cursor: pointer;">
+                            <h3>Director at iCode Academy</h3>
                             <span class="timeline-period">2022-2023</span>
-                            <p>Junior Developer</p>
+                            <p>Director overseeing curriculum and student engagement</p>
+                            <small style="color: #94a3b8; font-size: 0.9rem;">Click for details</small>
                         </div>
                         <div class="stage-3d" id="stage-3d-1"></div>
                     </div>
                     <div class="timeline-item" data-stage="2" data-color="#f59e0b">
-                        <div class="timeline-content">
-                            <h3>Current Role</h3>
-                            <span class="timeline-period">2023-Present</span>
-                            <p>Full Stack Developer</p>
+                        <div class="timeline-content" 
+                             onclick="showStageDetails(2)"
+                             style="cursor: pointer;">
+                            <h3>Web Developer for Shroom-Spy</h3>
+                            <span class="timeline-period">2023-2024</span>
+                            <p>Full Stack Developer for mushroom marketplace and community</p>
+                            <small style="color: #94a3b8; font-size: 0.9rem;">Click for details</small>
                         </div>
                         <div class="stage-3d" id="stage-3d-2"></div>
+                    </div>
+                    
+                    <div class="timeline-item" data-stage="3" data-color="#8b5cf6">
+                        <div class="timeline-content" 
+                             onclick="showStageDetails(3)"
+                             style="cursor: pointer;">
+                            <h3>Test Automation at Def Logix</h3>
+                            <span class="timeline-period">2024-Present</span>
+                            <p>QA Test Automation Engineer specializing in automated testing solutions</p>
+                            <small style="color: #94a3b8; font-size: 0.9rem;">Click for details</small>
+                        </div>
+                        <div class="stage-3d" id="stage-3d-3"></div>
                     </div>
                 </div>
             </div>
@@ -84,6 +105,16 @@
         </section>
     </main>
 
+    <!-- Modal for portfolio stage details -->
+    <div id="portfolio-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-content">
+                <!-- HTMX will load content here -->
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 Your Name. Built with FastAPI, HTMX, and Three.js</p>
@@ -92,5 +123,132 @@
 
     <script type="module" src="/js/portfolio-3d.js"></script>
     <script src="/js/scroll-animations.js"></script>
+    
+    <script>
+        // Modal functionality with mock data
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('portfolio-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            // Real portfolio stage data
+            const stageData = {
+                0: {
+                    title: "Texas State University",
+                    period: "2019-2022", 
+                    description: "Bachelor's in Computer Science with a minor in Mathematics",
+                    details: [
+                        "Bachelor's in Computer Science",
+                        "Minor in Mathematics",
+                        "Focus on Web Development and Software Engineering",
+                        "Relevant coursework: Data Structures, Algorithms, Database Systems",
+                        "Senior project: 3D Interactive Portfolio Website"
+                    ]
+                },
+                1: {
+                    title: "Director at iCode Academy",
+                    period: "2022-2023",
+                    description: "Director of iCode Academy, overseeing curriculum and student engagement",
+                    details: [
+                        "Led curriculum development for coding bootcamps",
+                        "Managed team of 10+ instructors and staff",
+                        "Increased student engagement by 40%",
+                        "Developed new teaching methodologies",
+                        "Oversaw graduation of 200+ students"
+                    ]
+                },
+                2: {
+                    title: "Web Developer for Shroom-Spy", 
+                    period: "2023-2024",
+                    description: "Full Stack Developer for mushroom marketplace and community platform",
+                    details: [
+                        "Built marketplace platform from ground up",
+                        "Implemented user authentication and payment systems",
+                        "Developed community features and forums",
+                        "Optimized performance for 10,000+ users",
+                        "Technologies: React, Node.js, MongoDB, Stripe API"
+                    ]
+                },
+                3: {
+                    title: "Test Automation at Def Logix",
+                    period: "2024-Present",
+                    description: "QA Test Automation Engineer specializing in automated testing solutions",
+                    details: [
+                        "Developed comprehensive automated test suites",
+                        "Implemented CI/CD pipeline integration for testing",
+                        "Created test frameworks using Selenium and Playwright",
+                        "Reduced manual testing time by 70%",
+                        "Technologies: Python, Selenium, Playwright, Jenkins, Docker"
+                    ]
+                }
+            };
+            
+            // Function to show stage details
+            window.showStageDetails = function(stageId) {
+                const stage = stageData[stageId];
+                if (!stage) return;
+                
+                modalContent.innerHTML = `
+                    <div>
+                        <h2>${stage.title}</h2>
+                        <span class="stage-period" style="color: var(--accent-color); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 1rem;">${stage.period}</span>
+                        <p class="stage-description" style="margin: 0 0 2rem 0; color: var(--text-color); font-size: 1.1rem; line-height: 1.6;">${stage.description}</p>
+                        
+                        <h3 style="color: var(--text-color); margin: 0 0 1.5rem 0; font-size: 1.3rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5rem;">Key Highlights</h3>
+                        <div class="stage-details" style="margin: 0; display: flex; flex-direction: column;">
+                            ${stage.details.map((detail, index) => `
+                                <div style="
+                                    display: block; 
+                                    width: 100%;
+                                    padding: 0.75rem 0; 
+                                    margin: 0;
+                                    border-bottom: ${index === stage.details.length - 1 ? 'none' : '1px solid var(--border-color)'}; 
+                                    color: var(--text-color);
+                                    line-height: 1.6;
+                                    clear: both;
+                                    
+                                ">
+                                    <span style="
+                                        color: var(--primary-color); 
+                                        font-weight: bold;
+                                        font-size: 1.1rem;
+                                        margin-right: 0.5rem;
+                                    ">✓</span>
+                                    <span>${detail}</span>
+                                </div>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+                modal.style.display = 'block';
+            };
+            
+            // Show modal when HTMX loads content  
+            document.body.addEventListener('htmx:afterRequest', function(event) {
+                if (event.detail.target.id === 'modal-content') {
+                    modal.style.display = 'block';
+                }
+            });
+            
+            // Close modal when clicking X
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

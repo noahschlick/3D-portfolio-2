@@ -39,26 +39,17 @@
                     <div class="timeline-item" 
                          data-stage="{{ loop.index0 }}"
                          data-color="{{ stage.color }}">
-                        <div class="stage-3d" id="stage-3d-{{ loop.index0 }}"></div>
-                        <div class="timeline-content"
-                             hx-get="/portfolio-stage/{{ loop.index0 }}"
-                             hx-target="#stage-details"
-                             hx-trigger="click">
+                        <div class="timeline-content" 
+                             onclick="showStageDetails({{ loop.index0 }})"
+                             style="cursor: pointer;">
                             <h3>{{ stage.title }}</h3>
                             <span class="timeline-period">{{ stage.period }}</span>
                             <p>{{ stage.description }}</p>
+                            <small style="color: #94a3b8; font-size: 0.9rem;">Click for details</small>
                         </div>
+                        <div class="stage-3d" id="stage-3d-{{ loop.index0 }}"></div>
                     </div>
                     {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <!-- Stage Details -->
-        <section class="stage-details">
-            <div class="container">
-                <div id="stage-details">
-                    <p class="stage-hint">Click on any timeline item to see more details</p>
                 </div>
             </div>
         </section>
@@ -85,13 +76,81 @@
         </section>
     </main>
 
+    <!-- Modal for portfolio stage details -->
+    <div id="portfolio-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-content">
+                <!-- JavaScript will load content here -->
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 Your Name. Built with FastAPI, HTMX, and Three.js</p>
         </div>
     </footer>
 
-    <script src="/static/js/portfolio-3d.js"></script>
+    <script type="module" src="/static/js/portfolio-3d.js"></script>
     <script src="/static/js/scroll-animations.js"></script>
+    
+    <script>
+        // Convert backend data to JavaScript
+        const portfolioStages = {{ portfolio_stages | tojson | safe }};
+        
+        // Modal functionality with backend data
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('portfolio-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            // Function to show stage details using backend data
+            window.showStageDetails = function(stageId) {
+                const stage = portfolioStages[stageId];
+                if (!stage) return;
+                
+                modalContent.innerHTML = `
+                    <div class="stage-detail-card">
+                        <h2 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.8rem;">${stage.title}</h2>
+                        <span class="stage-period" style="color: var(--accent-color); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 1rem;">${stage.period}</span>
+                        <p class="stage-description" style="margin: 0 0 2rem 0; color: var(--text-color); font-size: 1.1rem; line-height: 1.6;">${stage.description}</p>
+                        
+                        ${stage.details ? `
+                            <h3 style="color: var(--text-color); margin: 0 0 1.5rem 0; font-size: 1.3rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5rem;">Key Highlights</h3>
+                            <div class="stage-details" style="margin: 0;">
+                                ${stage.details.map((detail, index) => `
+                                    <div style="display: block; width: 100%; padding: 0.75rem 0; margin: 0; border-bottom: ${index === stage.details.length - 1 ? 'none' : '1px solid var(--border-color)'}; color: var(--text-color); line-height: 1.6; clear: both;">
+                                        <span style="color: var(--primary-color); font-weight: bold; font-size: 1.1rem; margin-right: 0.5rem;">✓</span>
+                                        <span>${detail}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                modal.style.display = 'block';
+            };
+            
+            // Close modal when clicking X
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
