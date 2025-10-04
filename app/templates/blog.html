@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Portfolio</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.8"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>Your Name</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Portfolio</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="blog-hero">
+            <div class="container">
+                <h1>Blog</h1>
+                <p>Thoughts on development, technology, and life</p>
+            </div>
+        </section>
+
+        <section class="blog-content">
+            <div class="container">
+                <div id="blog-posts" 
+                     hx-get="/blog/posts"
+                     hx-trigger="load"
+                     hx-indicator="#loading">
+                    <div id="loading" class="htmx-indicator">Loading posts...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Your Name. Built with FastAPI, HTMX, and Three.js</p>
+        </div>
+    </footer>
+</body>
+</html>

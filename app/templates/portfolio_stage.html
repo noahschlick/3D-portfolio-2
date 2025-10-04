@@ -1,0 +1,17 @@
+<div class="stage-detail-card">
+    <h3>{{ stage.title }}</h3>
+    <span class="stage-period">{{ stage.period }}</span>
+    <p class="stage-description">{{ stage.description }}</p>
+    
+    {% if stage.details %}
+    <ul class="stage-details-list">
+        {% for detail in stage.details %}
+        <li>{{ detail }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <button class="close-details" onclick="document.getElementById('stage-details').innerHTML = '<p class=\'stage-hint\'>Click on any timeline item to see more details</p>'">
+        Close
+    </button>
+</div>

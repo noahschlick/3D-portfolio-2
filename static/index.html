@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Dev Mode</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.8"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>Your Name</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Portfolio</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Full Stack Developer</h1>
+                <p class="hero-subtitle">Creating immersive digital experiences</p>
+            </div>
+        </section>
+
+        <!-- Portfolio Timeline -->
+        <section class="portfolio-timeline">
+            <div class="container">
+                <h2 class="section-title">My Journey</h2>
+                <div class="timeline">
+                    <div class="timeline-item" data-stage="0" data-color="#3b82f6">
+                        <div class="timeline-content">
+                            <h3>Education</h3>
+                            <span class="timeline-period">2018-2022</span>
+                            <p>Computer Science Degree</p>
+                        </div>
+                        <div class="stage-3d" id="stage-3d-0"></div>
+                    </div>
+                    <div class="timeline-item" data-stage="1" data-color="#10b981">
+                        <div class="timeline-content">
+                            <h3>First Job</h3>
+                            <span class="timeline-period">2022-2023</span>
+                            <p>Junior Developer</p>
+                        </div>
+                        <div class="stage-3d" id="stage-3d-1"></div>
+                    </div>
+                    <div class="timeline-item" data-stage="2" data-color="#f59e0b">
+                        <div class="timeline-content">
+                            <h3>Current Role</h3>
+                            <span class="timeline-period">2023-Present</span>
+                            <p>Full Stack Developer</p>
+                        </div>
+                        <div class="stage-3d" id="stage-3d-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills">
+            <div class="container">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-3d" data-skill="python"></div>
+                        <h3>Python</h3>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-3d" data-skill="javascript"></div>
+                        <h3>JavaScript</h3>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-3d" data-skill="web"></div>
+                        <h3>Web Development</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Your Name. Built with FastAPI, HTMX, and Three.js</p>
+        </div>
+    </footer>
+
+    <script type="module" src="/js/portfolio-3d.js"></script>
+    <script src="/js/scroll-animations.js"></script>
+</body>
+</html>
