@@ -4,14 +4,21 @@ export default defineConfig({
   root: 'static',
   server: {
     port: 3000,
-    // Removed proxy configuration - serve static files directly
   },
   build: {
     outDir: '../dist',
+    emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: 'static/js/portfolio-3d.js'
+        main: 'static/index.html',
+        blog: 'static/blog.html',
+        'blog-fluthered': 'static/blog-fluthered.html',
+        'blog-stoic-philosopher': 'static/blog-stoic-philosopher.html',
+        'blog-tic-tac-toe': 'static/blog-tic-tac-toe.html',
+        'blog-event-scout': 'static/blog-event-scout.html'
       }
-    }
-  }
+    },
+    copyPublicDir: true
+  },
+  publicDir: 'assets'
 })

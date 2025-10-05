@@ -334,14 +334,157 @@ class Portfolio3D {
                         'mushroom-model.glb': 2.5,
                         'react-model.glb': 1.8,
                         'work-model.glb': 2.0,
-                        'education-model.glb': 2.2
+                        'education-model.glb': 2.2,
+                        'beer-model.glb': 4.0,
+                        'glasses-model.glb': 5.175,
+                        'robot-pixel.glb': 1.4,
+                        'tic-tac-toe-model.glb': 2.6
                     };
                     
                     const scale = scaleMap[modelFile] || 2.0;
                     model.scale.setScalar(scale);
                     
-                    model.position.set(0, 0, 0);
+                    // Center the model properly
+                    if (modelFile === 'beer-model.glb') {
+                        // Calculate bounding box to center the beer model perfectly
+                        const box = new THREE.Box3().setFromObject(model);
+                        const center = box.getCenter(new THREE.Vector3());
+                        model.position.set(-center.x - 0.5, -center.y, -center.z);
+                    } else if (modelFile === 'glasses-model.glb') {
+                        // Calculate bounding box to center the glasses model perfectly
+                        const box = new THREE.Box3().setFromObject(model);
+                        const center = box.getCenter(new THREE.Vector3());
+                        model.position.set(-center.x, -center.y, -center.z);
+                    } else if (modelFile === 'robot-pixel.glb') {
+                        // Center the robot geometry itself for proper rotation
+                        model.traverse((child) => {
+                            if (child.isMesh && child.geometry) {
+                                child.geometry.center();
+                            }
+                        });
+                        model.position.set(0, 0, 0);
+                    } else if (modelFile === 'tic-tac-toe-model.glb') {
+                        // Position and tilt the tic-tac-toe model
+                        model.position.set(0, 0, 0);
+                        model.rotation.x = 0.2;  // Tilt forward slightly
+                        model.rotation.z = 0.1;  // Tilt to the side slightly
+                    } else {
+                        model.position.set(0, 0, 0);
+                    }
+                    
                     scene.add(model);
+
+                    // Add enhanced lighting for beer model
+                    if (modelFile === 'beer-model.glb') {
+                        // Additional ambient light for beer model (doubled again)
+                        const extraAmbientLight = new THREE.AmbientLight(0xffffff, 1.8);
+                        scene.add(extraAmbientLight);
+                        
+                        // Spotlight from top to highlight the beer (doubled again)
+                        const spotLight = new THREE.SpotLight(0xffffff, 9.0, 0, Math.PI / 6, 0.1);
+                        spotLight.position.set(0, 8, 0);
+                        spotLight.target.position.set(0, 0, 0);
+                        scene.add(spotLight);
+                        scene.add(spotLight.target);
+                        
+                        // Rim lighting from sides (doubled again)
+                        const rimLight1 = new THREE.PointLight(0xffaa00, 4.8, 20);
+                        rimLight1.position.set(5, 2, 3);
+                        scene.add(rimLight1);
+                        
+                        const rimLight2 = new THREE.PointLight(0xff6600, 4.2, 20);
+                        rimLight2.position.set(-5, 2, 3);
+                        scene.add(rimLight2);
+                        
+                        // Bottom fill light (doubled again)
+                        const fillLight = new THREE.PointLight(0x88aaff, 2.4, 15);
+                        fillLight.position.set(0, -3, 2);
+                        scene.add(fillLight);
+                    }
+
+                    // Add enhanced lighting for glasses model (triple brightness)
+                    if (modelFile === 'glasses-model.glb') {
+                        // Triple ambient light for glasses model
+                        const extraAmbientLight = new THREE.AmbientLight(0xffffff, 1.8);
+                        scene.add(extraAmbientLight);
+                        
+                        // Triple intensity spotlight from top
+                        const spotLight = new THREE.SpotLight(0xffffff, 9.0, 0, Math.PI / 6, 0.1);
+                        spotLight.position.set(0, 8, 0);
+                        spotLight.target.position.set(0, 0, 0);
+                        scene.add(spotLight);
+                        scene.add(spotLight.target);
+                        
+                        // Triple intensity rim lighting from sides
+                        const rimLight1 = new THREE.PointLight(0x00aaff, 4.8, 20);
+                        rimLight1.position.set(5, 2, 3);
+                        scene.add(rimLight1);
+                        
+                        const rimLight2 = new THREE.PointLight(0x0066ff, 4.2, 20);
+                        rimLight2.position.set(-5, 2, 3);
+                        scene.add(rimLight2);
+                        
+                        // Triple intensity bottom fill light
+                        const fillLight = new THREE.PointLight(0xaaffaa, 2.4, 15);
+                        fillLight.position.set(0, -3, 2);
+                        scene.add(fillLight);
+                    }
+
+                    // Add enhanced lighting for robot-pixel model (double brightness)
+                    if (modelFile === 'robot-pixel.glb') {
+                        // Double ambient light for robot model
+                        const extraAmbientLight = new THREE.AmbientLight(0xffffff, 1.2);
+                        scene.add(extraAmbientLight);
+                        
+                        // Double intensity spotlight from top
+                        const spotLight = new THREE.SpotLight(0xffffff, 6.0, 0, Math.PI / 6, 0.1);
+                        spotLight.position.set(0, 8, 0);
+                        spotLight.target.position.set(0, 0, 0);
+                        scene.add(spotLight);
+                        scene.add(spotLight.target);
+                        
+                        // Double intensity rim lighting with tech colors
+                        const rimLight1 = new THREE.PointLight(0xff4444, 3.2, 20);
+                        rimLight1.position.set(5, 2, 3);
+                        scene.add(rimLight1);
+                        
+                        const rimLight2 = new THREE.PointLight(0x44ff44, 2.8, 20);
+                        rimLight2.position.set(-5, 2, 3);
+                        scene.add(rimLight2);
+                        
+                        // Double intensity bottom fill light
+                        const fillLight = new THREE.PointLight(0x4444ff, 1.6, 15);
+                        fillLight.position.set(0, -3, 2);
+                        scene.add(fillLight);
+                    }
+
+                    // Add enhanced lighting for tic-tac-toe model (double brightness)
+                    if (modelFile === 'tic-tac-toe-model.glb') {
+                        // Double ambient light for tic-tac-toe model
+                        const extraAmbientLight = new THREE.AmbientLight(0xffffff, 1.2);
+                        scene.add(extraAmbientLight);
+                        
+                        // Double intensity spotlight from top
+                        const spotLight = new THREE.SpotLight(0xffffff, 6.0, 0, Math.PI / 6, 0.1);
+                        spotLight.position.set(0, 8, 0);
+                        spotLight.target.position.set(0, 0, 0);
+                        scene.add(spotLight);
+                        scene.add(spotLight.target);
+                        
+                        // Double intensity rim lighting with game colors
+                        const rimLight1 = new THREE.PointLight(0x00ff00, 3.2, 20);
+                        rimLight1.position.set(5, 2, 3);
+                        scene.add(rimLight1);
+                        
+                        const rimLight2 = new THREE.PointLight(0xff0000, 2.8, 20);
+                        rimLight2.position.set(-5, 2, 3);
+                        scene.add(rimLight2);
+                        
+                        // Double intensity bottom fill light
+                        const fillLight = new THREE.PointLight(0xffff00, 1.6, 15);
+                        fillLight.position.set(0, -3, 2);
+                        scene.add(fillLight);
+                    }
 
                     // Store scene data for animation
                     const sceneData = {
