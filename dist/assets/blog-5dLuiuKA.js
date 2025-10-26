@@ -1,13 +1,4 @@
-// Blog Terminal - Simple Load
-class BlogTerminalTypewriter {
-    constructor() {
-        // No initialization needed - everything loads immediately
-    }
-}
-
-// Add fade-in animation for terminal output
-const style = document.createElement('style');
-style.textContent = `
+import"./mobile-nav-BIYlgLop.js";const e=document.createElement("style");e.textContent=`
     @keyframes fadeInTerminal {
         from { opacity: 0; transform: translateY(5px); }
         to { opacity: 1; transform: translateY(0); }
@@ -76,10 +67,4 @@ style.textContent = `
             font-size: 1.8rem;
         }
     }
-`;
-document.head.appendChild(style);
-
-// Initialize typewriter effect when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new BlogTerminalTypewriter();
-});
+`;document.head.appendChild(e);document.addEventListener("DOMContentLoaded",()=>{});

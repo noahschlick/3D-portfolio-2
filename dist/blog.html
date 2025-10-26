@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Dev Mode</title>
-  <link rel="stylesheet" crossorigin href="/assets/style-C59e9QXL.css">
+  <script type="module" crossorigin src="/assets/blog-5dLuiuKA.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/mobile-nav-BIYlgLop.js">
+  <link rel="stylesheet" crossorigin href="/assets/mobile-nav-BCDPvMpM.css">
 </head>
 <body>
     <header class="header">
@@ -12,9 +14,14 @@
             <div class="nav-brand">
                 <h1>Noah Schlickeisen</h1>
             </div>
-            <ul class="nav-links">
-                <li><a href="/index.html">Portfolio</a></li>
-                <li><a href="/blog.html">Blog</a></li>
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/index.html" onclick="closeMobileMenu()">Portfolio</a></li>
+                <li><a href="/blog.html" onclick="closeMobileMenu()">Blog</a></li>
             </ul>
         </nav>
     </header>
@@ -121,7 +128,6 @@
             <p>&copy; 2024 Noah Schlickeisen. Built with FastAPI, HTMX, and Three.js</p>
         </div>
     </footer>
-    
-    <script src="/js/blog-terminal.js"></script>
+    
 </body>
 </html>

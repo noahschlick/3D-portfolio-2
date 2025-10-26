@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Dev Mode</title>
-
+    <title>Portfolio - Dev Mode</title>
     <script src="https://unpkg.com/htmx.org@1.9.8"></script>
-  <script type="module" crossorigin src="/assets/main-Dy8DEe6e.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/style-C59e9QXL.css">
+  <script type="module" crossorigin src="/assets/main-v3wG5YfF.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/mobile-nav-BIYlgLop.js">
+  <link rel="stylesheet" crossorigin href="/assets/mobile-nav-BCDPvMpM.css">
 </head>
 <body>
     <header class="header">
@@ -15,12 +15,17 @@
             <div class="nav-brand">
                 <h1>Noah Schlickeisen</h1>
             </div>
-            <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#timeline">Journey</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="/blog.html">Blog</a></li>
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero" onclick="closeMobileMenu()">Home</a></li>
+                <li><a href="#timeline" onclick="closeMobileMenu()">Journey</a></li>
+                <li><a href="#skills" onclick="closeMobileMenu()">Skills</a></li>
+                <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
+                <li><a href="/blog.html" onclick="closeMobileMenu()">Blog</a></li>
             </ul>
         </nav>
     </header>
@@ -264,10 +269,7 @@
             <p>&copy; 2024 Noah Schlickeisen. Built with FastAPI, HTMX, and Three.js</p>
         </div>
     </footer>
-
-
-    <script src="/js/scroll-animations.js"></script>
-    <script src="/js/terminal-typewriter.js"></script>
+
     
     <script>
         // Modal functionality with mock data
@@ -283,8 +285,8 @@
                     period: "2019-2022", 
                     description: "Bachelor's in Computer Science with a minor in Mathematics",
                     details: [
-                        "Focus on Web Development and Software Engineering",
-                        "Relevant coursework: Data Structures, Algorithms, Assembly Language, OOP, Software Engineering, Machine Learning and AI algorithms",
+                        "Focus on Software Engineering",
+                        "Relevant coursework: Data Structures, Algorithms, Assembly Language, OOP, Software Engineering, Machine Learning, and AI algorithms",
                         "Notable projects: AI-powered Tic-Tac-Toe player, Software Engineering Design Project: Lego Build Generator"
                     ]
                 },
@@ -293,10 +295,10 @@
                     period: "2022-2022",
                     description: "Director of iCode Academy, overseeing curriculum and student engagement",
                     details: [
-                        "Led curriculum development for coding bootcamps",
-                        "Managed team of 10+ instructors and staff",
-                        "Prepared and presented workshops on advanced programming topics for higher level students",
-                        "Built partnerships with local schools and organizations",
+                        "Lead curriculum development for coding bootcamps.",
+                        "Managed team of 7+ instructors and staff.",
+                        "Prepared and presented workshops on advanced programming topics for higher level students.",
+                        "Built partnerships with local schools and organizations.",
                     ]
                 },
                 2: {
@@ -304,10 +306,11 @@
                     period: "2023-2024",
                     description: "Front End Developer for mushroom marketplace and community platform",
                     details: [
-                        "Built marketplace platform from ground up using React and Node.js",
-                        "Implemented user authentication and payment systems",
-                        "Developed community features and forums",
-                        "Introduced performance optimizations using techniques like code splitting and lazy loading to increase permformance by 20%",
+                        "Designed and developed a full-stack marketplace platform from scratch using Next.js, implementing component-based architecture for maintainability and scalability.",
+                        "Architected and integrated a user authentication system using Firebase, implementing secure session management and role-based access control.",
+                        "Developed payment processing integration with Stripe API, handling transaction workflows and error handling for production environments.",
+                        "Engineered performance optimization with the use of load speed testing utilities, lazy loading, and code splitting, increasing performance by 20%.",
+                        "Implemented dynamic metadata generation techniques and URL mapping strategies to increase SEO performance.",
                         "Technologies: React, Node.js, Firebase, Stripe API"
                     ]
                 },
@@ -316,11 +319,13 @@
                     period: "2024-Present",
                     description: "QA Test Automation Engineer specializing in automated testing solutions",
                     details: [
-                        "Developed comprehensive automated test suites",
-                        "Created test platforms for evalutating software performance and reliability",
-                        "Developed a feature that automated the creation of subnets in vSphere environments",
-                        "Implemented a network visualization tool to map and monitor virtual networks",
-                        "Automated and maintained 200+ test cases",
+                        "Developed ~250 automated tests in Python that included a wide range of Linux operations, including file manipulation, permission management, and interactive shell operations via pexpect, improving testing speed and consistency.",
+                        "Co-developed a cybersecurity product testing platform designed to streamline evaluation workflows by automating the provisioning, configuration, and testing of virtualized environments.",
+                        "Engineered VM provisioning and infrastructure automation using Terraform, vSphere, and pyvMomi, enabling users to rapidly deploy isolated test environments across multiple OS platforms (Linux, FreeBSD, and Windows).",
+                        "Designed and implemented custom subnetting capabilities that allowed users to build virtual networks with pfSense-based routing, supporting flexible and reproducible network test topologies.",
+                        "Developed a dynamic network topology visualization feature, giving users a clear, interactive view of the deployed machines and connections with virtual subnets.",
+                        "Contributed to the development of a No-/Low-Code (NLC) test automation framework, assisting in the development and debugging of modular test components that enabled non-developers to create automated cyber security test scenarios.",
+                        "Designed and automated test scenarios to evaluate the strength and reliability of Personal Security Products (PSPs) on Windows and Linux under variouse attack and stress conditions.",
                         "Technologies: Python, Selenium, Terraform, vSphere, Docker, pyVmomi, pexpect, pfSense, Linux, Powershell"
                     ]
                 }
@@ -494,6 +499,6 @@
                 }
             });
         });
-    </script>
+    </script>
 </body>
 </html>
