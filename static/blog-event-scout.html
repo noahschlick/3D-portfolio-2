@@ -12,9 +12,14 @@
             <div class="nav-brand">
                 <h1>Noah Schlickeisen</h1>
             </div>
-            <ul class="nav-links">
-                <li><a href="/index.html">Portfolio</a></li>
-                <li><a href="/blog.html">Blog</a></li>
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/index.html" onclick="closeMobileMenu()">Portfolio</a></li>
+                <li><a href="/blog.html" onclick="closeMobileMenu()">Blog</a></li>
             </ul>
         </nav>
     </header>
@@ -72,5 +77,6 @@
             text-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41 !important;
         }
     </style>
+    <script src="/js/mobile-nav.js"></script>
 </body>
 </html>

@@ -17,8 +17,6 @@ export default defineConfig({
         'blog-tic-tac-toe': 'static/blog-tic-tac-toe.html',
         'blog-event-scout': 'static/blog-event-scout.html'
       }
-    },
-    copyPublicDir: true
-  },
-  publicDir: 'assets'
+    }
+  }
 })

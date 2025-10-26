@@ -786,19 +786,16 @@ body {
 
 .modal-content {
     background: #0a0f0a;
-    margin: 2% auto;
+    margin: 5% auto;
     padding: 2rem;
     border-radius: 8px;
     width: 90%;
-    max-width: 800px;
-    max-height: 90vh;
+    max-width: 600px;
     position: relative;
     border: 2px solid #00ff41;
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), 0 20px 40px rgba(0, 0, 0, 0.7);
     font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
     animation: terminalGlow 3s ease-in-out infinite alternate;
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .close-modal {
@@ -854,51 +851,6 @@ body {
     text-shadow: 0 0 5px #00ff41;
 }
 
-/* Custom scrollbar for modal content */
-.modal-content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.modal-content::-webkit-scrollbar-track {
-    background: #1a1a1a;
-    border-radius: 4px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-    background: #00ff41;
-    border-radius: 4px;
-    box-shadow: 0 0 5px #00ff41;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-    background: #ffffff;
-    box-shadow: 0 0 10px #00ff41;
-}
-
-/* VIM editor content scrollable area */
-.vim-content {
-    max-height: 60vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.vim-content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.vim-content::-webkit-scrollbar-track {
-    background: #0a0f0a;
-}
-
-.vim-content::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 3px;
-}
-
-.vim-content::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
 /* Footer */
 .footer {
     background: var(--card-bg);
@@ -943,114 +895,6 @@ body {
 
 .htmx-request.htmx-indicator {
     opacity: 1;
-}
-
-/* Hamburger Menu Styles */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: #00ff41;
-    margin: 3px 0;
-    transition: 0.3s;
-    box-shadow: 0 0 5px #00ff41;
-}
-
-.hamburger.active span:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-}
-
-/* Mobile Navigation */
-@media (max-width: 768px) {
-    .nav {
-        position: relative;
-    }
-    
-    .hamburger {
-        display: flex;
-    }
-    
-    .nav-links {
-        position: fixed;
-        top: 70px;
-        right: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding-top: 3rem;
-        transition: right 0.3s ease;
-        border-left: 2px solid #00ff41;
-        box-shadow: -5px 0 15px rgba(0, 255, 65, 0.2);
-    }
-    
-    .nav-links.active {
-        right: 0;
-    }
-    
-    .nav-links li {
-        margin: 1.5rem 0;
-        opacity: 0;
-        transform: translateX(20px);
-        transition: all 0.3s ease;
-    }
-    
-    .nav-links.active li {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    
-    .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
-    .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
-    .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
-    .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
-    .nav-links.active li:nth-child(5) { transition-delay: 0.5s; }
-    
-    .nav-links a {
-        font-size: 1.2rem;
-        padding: 1rem;
-        border: 2px solid transparent;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-    }
-    
-    .nav-links a:hover {
-        border-color: #00ff41;
-        background: rgba(0, 255, 65, 0.1);
-    }
-    
-    .nav-brand h1 {
-        font-size: 1.2rem;
-    }
-    
-    /* Modal responsiveness on mobile */
-    .modal-content {
-        margin: 1% auto;
-        padding: 1rem;
-        width: 95%;
-        max-height: 95vh;
-    }
-    
-    .vim-content {
-        max-height: 50vh;
-    }
 }
 
 /* Responsive Design */

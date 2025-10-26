@@ -12,9 +12,14 @@
             <div class="nav-brand">
                 <h1>Noah Schlickeisen</h1>
             </div>
-            <ul class="nav-links">
-                <li><a href="/index.html">Portfolio</a></li>
-                <li><a href="/blog.html">Blog</a></li>
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/index.html" onclick="closeMobileMenu()">Portfolio</a></li>
+                <li><a href="/blog.html" onclick="closeMobileMenu()">Blog</a></li>
             </ul>
         </nav>
     </header>
@@ -37,16 +42,136 @@
                     </div>
                 </div>
                 
-                <div class="post-content" style="background: #0a0f0a; border: 2px solid #00ff41; border-radius: 8px; padding: 3rem; font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);">
-                    <div style="text-align: center; color: #00ff41; font-size: 2rem; margin: 4rem 0; text-shadow: 0 0 10px #00ff41;">
-                        <div style="margin-bottom: 2rem;">
-                            <span style="animation: blink 1s infinite;">|</span> Blog in progress... <span style="animation: blink 1s infinite;">|</span>
-                        </div>
-                        <div style="font-size: 1rem; color: #ffffff; opacity: 0.8;">
-                            This comprehensive walkthrough of building Fluthered is currently being written.
-                            <br>Check back soon for the complete development story!
+                <div class="post-content" style="background: #0a0f0a; border: 2px solid #00ff41; border-radius: 8px; padding: 3rem; font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); line-height: 1.7;">
+                    
+
+                    <!-- Project Overview Section -->
+                    <div class="blog-section" style="margin: 2rem 0;">
+                        <h3 style="color: #00ff41; font-size: 1.4rem; margin-bottom: 1rem; text-shadow: 0 0 8px #00ff41;">
+                            📱 Project Overview
+                        </h3>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            <b>Fluthered</b> is an interactive drinking game app designed for groups of 2+ players, inspired by the classic "Do or Drink" format. The game randomly selects participants to complete challenges—ranging from amusing to slightly embarrassing—or take a drink instead. It features three card types: <b>Action Cards</b> (standard do-or-drink prompts), <b>Challenge Cards</b> (multi-turn rule-based tasks for selected players), and <b>Challenge Over Cards</b> (signaling the end of active challenges).
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            Built with Flutter for the frontend and powered by a Flask backend with Flask-SocketIO and MongoDB, Fluthered delivers real-time multiplayer synchronization. One player controls the card deck, and as they cycle through cards, all other players see live updates on their screens simultaneously—creating a seamless, shared gaming experience perfect for parties and social gatherings.
+                        </p>
+                        
+                        <!-- Image placeholder -->
+                        <div class="blog-image" style="margin: 1.5rem 0; text-align: center; padding: 2rem; border: 1px dashed #00ff41; border-radius: 4px;">
+                            <span style="color: #00ff41; font-size: 0.9rem;">📸 [Fluthered App Screenshot - Coming Soon]</span>
                         </div>
                     </div>
+
+                    <!-- Motivation -->
+                    <div class="blog-section" style="margin: 2rem 0;">
+                        <h3 style="color: #00ff41; font-size: 1.4rem; margin-bottom: 1rem; text-shadow: 0 0 8px #00ff41;">
+                            ⚡ Motivation
+                        </h3>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            I built this app to gain end-to-end experience developing a mobile application with a custom backend. The concept originated during my college years studying Computer Science, when I created a minimal C++ terminal version as a hobby project to play with friends. While basic and unpolished, it served as valuable practice for Object-Oriented Programming—a concept I was still mastering at the time.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            Fast forward a few years to my first job in automated testing. While I loved the work and appreciated getting paid to do something I enjoyed, I noticed the tasks could become repetitive. I grew concerned that I wasn't challenging myself enough as a developer—that I was stuck on "easy mode." To push my skills forward, I started tackling side projects outside of work to accelerate my growth.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            Revisiting this drinking game felt like the perfect opportunity. I wanted to transform it into a polished mobile app that anyone could play on their phone. My goal was to explore unfamiliar territory while deepening my expertise in areas I already knew well—hence the decision to build a full-stack mobile application. This allowed me to navigate the challenges of a cross-platform frontend framework (Flutter) while integrating it with a backend server built in Python.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            In my previous projects, I'd relied heavily on Firebase as my database solution. While convenient, Firebase abstracts away much of the underlying complexity. One of my core objectives for this project was to learn how to build a mobile app from scratch without shortcuts—to strengthen my fundamental development skills. That meant implementing as much of the backend infrastructure myself as possible, including setting up Flask, Flask-SocketIO for real-time communication, and MongoDB for data persistence.
+                        </p>
+                    </div>
+
+                    <!-- Technical Architecture -->
+                    <div class="blog-section" style="margin: 2rem 0;">
+                        <h3 style="color: #00ff41; font-size: 1.4rem; margin-bottom: 1rem; text-shadow: 0 0 8px #00ff41;">
+                            🏗️ Tech Stack
+                        </h3>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            The application follows a modern client-server architecture with real-time capabilities:
+                        </p>
+
+                        <ul style="color: #ffffff; margin-left: 2rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Frontend:</strong> Flutter for cross-platform mobile development</li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Backend:</strong> Python Flask for API endpoints and game logic</li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Real-time:</strong> Socket.IO for live game updates</li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Database:</strong> MongoDB for flexible game data storage</li>
+                        </ul>
+                                   
+                        <h4 style="color: #00ff41;">Frontend (Flutter and Dart):</h4> 
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            I needed the app to run seamlessly on both Android and iOS without the overhead of maintaining two separate codebases, so I opted for a cross-platform framework. Initially, I considered React Native due to my existing JavaScript and React experience from web development. However, after researching the architectural differences between frameworks, I chose Flutter for several technical reasons.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong >Performance Architecture:</strong> JavaScript-based frameworks like React Native require a bridge to communicate between the JavaScript runtime and native ARM machine code. This bridge introduces overhead that can create performance bottlenecks, particularly during complex operations or rapid UI updates—exactly what a real-time card game demands. Flutter takes a different approach: it compiles Dart directly to native ARM code, eliminating the bridge entirely. The result is faster execution with the processor running the compiled code directly, producing smoother performance across the board.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong >Rendering Engine:</strong> Flutter's use of the Skia graphics engine was another decisive factor. Instead of relying on platform-specific UI components (iOS UIKit or Android's native widgets), Flutter renders every pixel itself. This matters because when you depend on native components, you're constrained by each platform's rendering pipeline—iOS and Android handle UI differently, and various OS versions have distinct performance characteristics. These inconsistencies can create unpredictable bottlenecks.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            By controlling the entire rendering pipeline, Flutter optimizes frame delivery and guarantees consistent 60fps performance (or 120fps on high-refresh displays) without waiting for platform components to catch up. For a multiplayer game where all players see synchronized card updates in real-time, this consistency across devices is critical.
+                        </p>
+
+                        <h4 style="color: #00ff41;">Backend DB(MongoDB):</h4> 
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            I chose MongoDB primarily for its flexible, schema-less design. Unlike traditional SQL databases that require predefined table structures, MongoDB uses a document-based model where schemas can evolve organically. This flexibility is invaluable for future expansion—if I decide to add different game modes or card types down the line, I can do so without restructuring the entire database or running complex migrations.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong>Performance for Real-Time Gameplay:</strong> MongoDB excels at read-heavy operations, which aligns perfectly with this use case. During an active game, multiple players are constantly fetching the current card state, loading player lists, and syncing game status. MongoDB is optimized for retrieving entire documents quickly rather than performing complex table joins, making these frequent read operations lightning-fast. This ensures smooth, responsive gameplay even when multiple players are accessing data simultaneously.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong>Scalability Architecture:</strong> MongoDB's horizontal scalability was another key factor. Unlike traditional databases that primarily scale vertically (upgrading to more powerful hardware), MongoDB is designed to scale out by distributing data across multiple servers through sharding. This architectural decision matters for long-term viability—if the app gains traction and needs to support thousands of concurrent games, MongoDB can handle the load without requiring major infrastructure overhauls. The ability to add capacity by simply adding more servers provides a clear growth path without hitting hard performance ceilings.
+                        </p>
+
+                        <h4 style="color: #00ff41;">Backend Framework (Flask + Flask-SocketIO):</h4> 
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            I chose Flask and Flask-SocketIO as the backend framework because it offered the lowest friction path to building a functional prototype. The framework perfectly matched the app's core requirements: simple REST endpoints for game management, real-time WebSocket communication for synchronized card updates across game rooms, Firebase token verification for authentication, and seamless MongoDB integration for data persistence.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            Flask's minimalist design philosophy made it incredibly easy to set up and iterate quickly—critical for an MVP where rapid prototyping and testing were priorities. Flask-SocketIO's room-based architecture mapped naturally to the game's multiplayer structure, allowing me to broadcast card updates to specific game sessions without complex routing logic. Additionally, the entire stack containerizes cleanly with Docker and remains straightforward to extend as new features are added.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong>Looking Forward:</strong> While Flask serves the current needs well, I'm considering migrating to FastAPI in future iterations. FastAPI's async/await architecture would handle concurrent requests more efficiently, particularly as the number of simultaneous games scales. Its automatic API documentation and built-in type validation would also improve maintainability. However, for this initial release, Flask provides a stable, battle-tested foundation that works reliably in the development environment and will support the app's launch.
+                        </p>
+
+                        <h4 style="color: #00ff41;">Containerization (Docker):</h4> 
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            I was first introduced to Docker through my work in automated testing, where I quickly became impressed by how effortlessly it handles environment setup and configuration. The ability to spin up consistent, isolated testing environments with a single command felt almost magical compared to traditional manual setup processes.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            The true value of Docker became apparent when my laptop experienced a hardware failure and required a complete factory reset. After re-cloning my frontend and backend repositories, I spent hours reinstalling dependencies, configuring environment variables, and troubleshooting version mismatches just to get my development environment functional again. That frustrating experience convinced me to containerize the entire backend stack.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong>Implementation:</strong> I containerized both the MongoDB database and the Flask application with all its Python dependencies. Now, spinning up the complete development environment requires only docker-compose up—no more manually installing MongoDB, managing Python virtual environments, or debugging dependency conflicts. The consistency Docker provides across different machines and operating systems has been invaluable, ensuring that the app runs identically whether I'm developing on my laptop, testing on another machine, or eventually deploying to production.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            The experience reinforced a lesson from my testing background: investing time in proper infrastructure setup pays dividends in reduced friction and faster iteration cycles.
+                        </p>
+
+                        <h4 style="color: #00ff41;">Authentication:</h4>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            I made a pragmatic decision to use Firebase Auth for OAuth2 authentication rather than implementing it from scratch. Building a secure OAuth2 system requires implementing numerous high-stakes security features—authorization code flows, token generation and validation, refresh token management, PKCE for mobile security, and protection against common attack vectors like CSRF and token replay. Given the security implications of getting authentication wrong, I felt more comfortable delegating these critical components to a battle-tested, industry-standard solution maintained by Google.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            Firebase Auth generates JWT (JSON Web Tokens) that my Flask backend can easily verify, providing a clean separation between authentication (handled by Firebase) and authorization (handled by my backend). The token verification process is straightforward: the frontend sends the Firebase ID token with each request, and the backend validates it against Firebase's public keys to confirm the user's identity before processing game operations.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            While I acknowledged earlier that one goal of this project was to minimize shortcuts and build as much as possible myself, authentication is the exception where security considerations outweigh learning benefits. Implementing OAuth2 incorrectly could compromise user accounts, whereas Firebase Auth provides enterprise-grade security that would take months to replicate and maintain independently.
+                        </p>
+                    </div>
+
+
+
+                    <!-- Call to Action -->
+                    <div class="blog-cta" style="margin: 2rem 0; padding: 1.5rem; border: 2px solid #00ff41; border-radius: 4px; text-align: center; background: rgba(0, 255, 65, 0.05);">
+                        <p style="color: #00ff41; margin-bottom: 1rem; font-weight: bold;">
+                            More to come soon!
+                        </p>
+                        <p style="color: #ffffff; margin: 0; font-size: 0.9rem;">
+                            Reach out to discuss the technical implementation details!
+                        </p>
+                    </div>
+
                 </div>
                 
                 <div class="post-footer">
@@ -72,6 +197,36 @@
             color: #ffffff !important;
             text-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41 !important;
         }
+        
+        /* Blog content enhancements */
+        .blog-paragraph p {
+            text-indent: 1rem;
+        }
+        
+        .blog-section {
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            padding-bottom: 1rem;
+        }
+        
+        .code-block {
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: "Python";
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            color: #00ff41;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .challenge-item:hover {
+            background: rgba(0, 255, 65, 0.1) !important;
+            transition: background 0.3s ease;
+        }
     </style>
+    <script src="/js/mobile-nav.js"></script>
 </body>
 </html>

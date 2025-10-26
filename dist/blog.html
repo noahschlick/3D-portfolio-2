@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Dev Mode</title>
+  <link rel="stylesheet" crossorigin href="/assets/style-C59e9QXL.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>Noah Schlickeisen</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/index.html">Portfolio</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Blog Hero Section -->
+        <section class="blog-hero">
+            <div class="container">
+                <div class="blog-hero-content">
+                    <h1 class="hero-name">
+                        <div class="terminal-output" id="blog-output">Development Blog</div>
+                    </h1>
+                    <p style="text-align: center; color: var(--text-secondary); font-size: 1.2rem; margin-top: 1rem; font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;">
+                        Deep dives into projects, technologies, and development processes
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Posts Section -->
+        <section class="blog-posts">
+            <div class="container">
+                <div class="blog-grid" id="blog-cards-container">
+                    <!-- How I Built Fluthered -->
+                    <div class="blog-card" onclick="window.location.href='/blog-fluthered.html'" style="cursor: pointer;">
+                        <div class="blog-content">
+                            <h3>How I Built Fluthered</h3>
+                            <p>A comprehensive walkthrough of building an interactive drinking game app using Flutter, Python Flask, and real-time communication with Socket.IO.</p>
+                            <div class="blog-meta">
+                                <span class="blog-date">March 2024</span>
+                                <span class="read-time">8 min read</span>
+                            </div>
+                            <div class="blog-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">Flask</span>
+                                <span class="tag">Socket.IO</span>
+                                <span class="tag">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How I Built the Stoic Philosopher Chat Bot -->
+                    <div class="blog-card" onclick="window.location.href='/blog-stoic-philosopher.html'" style="cursor: pointer;">
+                        <div class="blog-content">
+                            <h3>How I Built the Stoic Philosopher Chat Bot</h3>
+                            <p>Building an AI-powered Discord bot that provides stoic philosophy insights using ChatGPT API and local LLM integration for philosophical conversations.</p>
+                            <div class="blog-meta">
+                                <span class="blog-date">February 2024</span>
+                                <span class="read-time">6 min read</span>
+                            </div>
+                            <div class="blog-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">ChatGPT API</span>
+                                <span class="tag">LLM (Llamma)</span>
+                                <span class="tag">Discord API</span>
+                                <span class="tag">AI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How I Built the Tic-Tac-Toe Player -->
+                    <div class="blog-card" onclick="window.location.href='/blog-tic-tac-toe.html'" style="cursor: pointer;">
+                        <div class="blog-content">
+                            <h3>How I Built the AI Tic-Tac-Toe Player</h3>
+                            <p>Implementing the classic minimax algorithm in C++ to create an unbeatable AI opponent for tic-tac-toe, exploring game theory and optimization techniques.</p>
+                            <div class="blog-meta">
+                                <span class="blog-date">January 2024</span>
+                                <span class="read-time">5 min read</span>
+                            </div>
+                            <div class="blog-tags">
+                                <span class="tag">C++</span>
+                                <span class="tag">Min Max Algorithm</span>
+                                <span class="tag">Game Theory</span>
+                                <span class="tag">AI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Scout Progress -->
+                    <div class="blog-card" onclick="window.location.href='/blog-event-scout.html'" style="cursor: pointer;">
+                        <div class="blog-content">
+                            <h3>Event Scout Development Progress</h3>
+                            <p>Building an event discovery platform with Python and Selenium for web scraping, PostgreSQL for data management, and creating a seamless user experience for finding local events.</p>
+                            <div class="blog-meta">
+                                <span class="blog-date">December 2023</span>
+                                <span class="read-time">7 min read</span>
+                            </div>
+                            <div class="blog-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Selenium</span>
+                                <span class="tag">PostgreSQL</span>
+                                <span class="tag">Web Scraping</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Noah Schlickeisen. Built with FastAPI, HTMX, and Three.js</p>
+        </div>
+    </footer>
+    
+    <script src="/js/blog-terminal.js"></script>
+</body>
+</html>
