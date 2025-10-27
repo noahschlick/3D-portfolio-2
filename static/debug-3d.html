@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Debug Test</title>
+    <style>
+        body { margin: 0; background: #000; color: white; font-family: monospace; }
+        #container { width: 800px; height: 600px; margin: 50px auto; border: 1px solid #333; }
+        #status { text-align: center; margin: 20px; }
+    </style>
+</head>
+<body>
+    <div id="status">Loading 3D test...</div>
+    <div id="container"></div>
+    
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+        const status = document.getElementById('status');
+        const container = document.getElementById('container');
+
+        // Test if Three.js is working
+        status.innerHTML = "Three.js loaded. Testing basic scene...";
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 800/600, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        
+        renderer.setSize(800, 600);
+        renderer.setClearColor(0x1a1a1a);
+        container.appendChild(renderer.domElement);
+        
+        // Add basic lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 5, 5);
+        scene.add(directionalLight);
+        
+        camera.position.z = 5;
+        
+        // Test basic geometry first
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        
+        status.innerHTML = "Basic cube created. Testing GLB loading...";
+        
+        // Test GLB loading
+        const loader = new GLTFLoader();
+        
+        // Test multiple possible paths
+        const testPaths = [
+            '/assets/retro-computer-model.glb',
+            './assets/retro-computer-model.glb',
+            'assets/retro-computer-model.glb',
+            '/assets/beer-model.glb'
+        ];
+        
+        let loadSuccess = false;
+        
+        function testPath(pathIndex = 0) {
+            if (pathIndex >= testPaths.length) {
+                status.innerHTML = "All GLB paths failed. Check console for details.";
+                return;
+            }
+            
+            const path = testPaths[pathIndex];
+            status.innerHTML = `Testing path ${pathIndex + 1}/${testPaths.length}: ${path}`;
+            
+            loader.load(
+                path,
+                (gltf) => {
+                    status.innerHTML = `SUCCESS! Loaded: ${path}`;
+                    loadSuccess = true;
+                    
+                    const model = gltf.scene;
+                    model.scale.setScalar(2);
+                    model.position.set(2, 0, 0);
+                    scene.add(model);
+                    
+                    // Remove test cube
+                    scene.remove(cube);
+                },
+                (progress) => {
+                    const percent = (progress.loaded / progress.total * 100).toFixed(2);
+                    status.innerHTML = `Loading ${path}: ${percent}%`;
+                },
+                (error) => {
+                    console.error(`Failed to load ${path}:`, error);
+                    testPath(pathIndex + 1);
+                }
+            );
+        }
+        
+        testPath();
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        console.log('Debug script loaded');
+    </script>
+</body>
+</html>

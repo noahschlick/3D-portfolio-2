@@ -1,6 +1,14 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+// Import assets directly so Vite can handle them properly
+import retroComputerUrl from '../assets/retro-computer-model.glb?url';
+import beerModelUrl from '../assets/beer-model.glb?url';
+import glassesModelUrl from '../assets/glasses-model.glb?url';
+import mushroomModelUrl from '../assets/mushroom-model.glb?url';
+import robotPixelUrl from '../assets/robot-pixel.glb?url';
+import ticTacToeModelUrl from '../assets/tic-tac-toe-model.glb?url';
+
 // Portfolio 3D Scene Manager
 class Portfolio3D {
     constructor() {
@@ -16,13 +24,19 @@ class Portfolio3D {
     }
 
     createHeroScene() {
+        console.log('Creating hero scene...');
         const heroContainer = document.getElementById('hero-3d-container');
-        if (!heroContainer) return;
+        console.log('Hero container element:', heroContainer);
+        if (!heroContainer) {
+            console.error('Hero container not found!');
+            return;
+        }
 
         const scene = new THREE.Scene();
         // Use fixed larger dimensions
         const containerWidth = 1000;
         const containerHeight = 400;
+        console.log('Hero scene dimensions:', containerWidth, containerHeight);
         
         const camera = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -32,6 +46,8 @@ class Portfolio3D {
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         heroContainer.appendChild(renderer.domElement);
+        console.log('Renderer canvas added to hero container');
+        console.log('Canvas element:', renderer.domElement);
 
         // Enhanced lighting setup for hero
         const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
@@ -54,13 +70,17 @@ class Portfolio3D {
 
         // Load the retro computer model
         const loader = new GLTFLoader();
-        loader.load('/assets/retro-computer-model.glb', (gltf) => {
+        console.log('Starting GLB load for retro computer...');
+        console.log('Using imported URL:', retroComputerUrl);
+        loader.load(retroComputerUrl, (gltf) => {
+            console.log('GLB loaded successfully:', gltf);
             const model = gltf.scene;
             
             // Scale and position the retro computer
             model.scale.setScalar(5.0);
             model.position.set(0, -1, 0);
             scene.add(model);
+            console.log('Retro computer model added to scene');
 
             // Store scene data for animation
             const sceneData = {
@@ -89,8 +109,11 @@ class Portfolio3D {
             };
             animate();
             
-        }, undefined, (error) => {
+        }, (progress) => {
+            console.log('Loading progress:', (progress.loaded / progress.total * 100).toFixed(2) + '%');
+        }, (error) => {
             console.error('Error loading retro computer model:', error);
+            console.error('Full error details:', error);
         });
 
         // Handle window resize - maintain fixed dimensions for now
@@ -165,7 +188,7 @@ class Portfolio3D {
                 
                 console.log(`Attempting to load ${modelFile} for stage ${index} with scale ${modelScale}`);
                 loader.load(
-                    `/assets/${modelFile}`,
+                    `./assets/${modelFile}`,
                     (gltf) => {
                         const model = gltf.scene;
                         model.scale.setScalar(modelScale);
@@ -325,8 +348,24 @@ class Portfolio3D {
             // Load the GLB model based on data-model attribute
             const modelFile = container.dataset.model;
             if (modelFile) {
+                // Map model files to imported URLs
+                const modelUrlMap = {
+                    'beer-model.glb': beerModelUrl,
+                    'glasses-model.glb': glassesModelUrl,
+                    'mushroom-model.glb': mushroomModelUrl,
+                    'robot-pixel.glb': robotPixelUrl,
+                    'tic-tac-toe-model.glb': ticTacToeModelUrl
+                };
+                
+                const modelUrl = modelUrlMap[modelFile];
+                if (!modelUrl) {
+                    console.error('Model URL not found for:', modelFile);
+                    return;
+                }
+                
+                console.log('Loading project model:', modelFile, 'from URL:', modelUrl);
                 const loader = new GLTFLoader();
-                loader.load(`/assets/${modelFile}`, (gltf) => {
+                loader.load(modelUrl, (gltf) => {
                     const model = gltf.scene;
                     
                     // Scale model based on filename
@@ -509,8 +548,11 @@ class Portfolio3D {
                     };
                     animate();
                     
-                }, undefined, (error) => {
-                    console.error('Error loading project model:', error);
+                }, (progress) => {
+                    console.log(`Loading ${modelFile}: ${(progress.loaded / progress.total * 100).toFixed(2)}%`);
+                }, (error) => {
+                    console.error('Error loading project model:', modelFile, error);
+                    console.error('Model URL was:', modelUrl);
                 });
             }
         });
@@ -604,7 +646,18 @@ class Portfolio3D {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing Portfolio3D...');
+    
+    // Check if the hero container exists
+    const heroContainer = document.getElementById('hero-3d-container');
+    console.log('Hero container found:', heroContainer);
+    
+    // Check if project containers exist
+    const projectContainers = document.querySelectorAll('.project-3d');
+    console.log('Project containers found:', projectContainers.length);
+    
     window.portfolio3D = new Portfolio3D();
+    console.log('Portfolio3D initialized:', window.portfolio3D);
     
     // Add scroll event listener for timeline rotations
     window.addEventListener('scroll', () => {

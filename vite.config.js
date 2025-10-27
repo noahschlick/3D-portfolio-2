@@ -16,7 +16,8 @@ export default defineConfig({
         'blog-fluthered': 'static/blog-fluthered.html',
         'blog-stoic-philosopher': 'static/blog-stoic-philosopher.html',
         'blog-tic-tac-toe': 'static/blog-tic-tac-toe.html',
-        'blog-event-scout': 'static/blog-event-scout.html'
+        'blog-event-scout': 'static/blog-event-scout.html',
+        'debug-3d': 'static/debug-3d.html'
       }
     }
   }

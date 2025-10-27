@@ -12,14 +12,14 @@
             <div class="nav-brand">
                 <h1>Noah Schlickeisen</h1>
             </div>
-            <div class="hamburger" onclick="toggleMobileMenu()">
+            <div class="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="/index.html" onclick="closeMobileMenu()">Portfolio</a></li>
-                <li><a href="/blog.html" onclick="closeMobileMenu()">Blog</a></li>
+                <li><a href="/index.html">Portfolio</a></li>
+                <li><a href="/blog.html">Blog</a></li>
             </ul>
         </nav>
     </header>
@@ -42,7 +42,7 @@
                 </div>
                 
                 <div class="post-content" style="background: #0a0f0a; border: 2px solid #00ff41; border-radius: 8px; padding: 3rem; font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);">
-                    <div style="text-align: center; color: #00ff41; font-size: 2rem; margin: 4rem 0; text-shadow: 0 0 10px #00ff41;">
+                    <!-- <div style="text-align: center; color: #00ff41; font-size: 2rem; margin: 4rem 0; text-shadow: 0 0 10px #00ff41;">
                         <div style="margin-bottom: 2rem;">
                             <span style="animation: blink 1s infinite;">|</span> Blog in progress... <span style="animation: blink 1s infinite;">|</span>
                         </div>
@@ -50,13 +50,312 @@
                             The comprehensive progress report on Event Scout platform development is being written.
                             <br>Check back soon for the complete project journey!
                         </div>
+                    </div> -->
+                    
+                    <!-- Project Overview Section -->
+                    <div class="blog-section" style="margin: 2rem 0;">
+                        <h3 style="color: #00ff41; font-size: 1.4rem; margin-bottom: 1rem; text-shadow: 0 0 8px #00ff41;">
+                            📱 Project Overview
+                        </h3>
+                        <h4 style="color: #00ff41; font-size: 1.4rem; margin-bottom: 1rem; text-shadow: 0 0 8px #00ff41;">
+                            Discovering Events at Scale: Building Event Scout with Web Scraping
+                        </h4>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            Web scraping has always fascinated me as one of those automation techniques that can genuinely simplify daily life. The ability to programmatically extract and organize data from websites opens up countless possibilities for building useful tools and utilities. When I considered what kind of scraping project would be both challenging and practical, event discovery immediately came to mind.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            Like many people, I regularly browse platforms like EventBrite and Meetup to find interesting events—whether for networking, learning new skills, or simply having fun. However, manually checking multiple platforms and filtering through countless listings can be time-consuming and inefficient. What if I could automate this entire process and create a centralized hub for event discovery?
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            This challenge led me to create <strong>Event Scout</strong>, a modular web scraping system designed to collect, organize, and serve event data from multiple platforms.
+                        </p>
+                        <!-- Image placeholder -->
+                        <div class="blog-image" style="margin: 1.5rem 0; text-align: center; padding: 2rem; border: 1px dashed #00ff41; border-radius: 4px;">
+                            <span style="color: #00ff41; font-size: 0.9rem;">📸 [Event Scout App Screenshot - Coming Soon]</span>
+                        </div>
                     </div>
+
+                    <!-- Vision -->
+                    <div class="blog-section" style="margin: 2rem 0;">
+                        <h3 style="color: #00ff41; font-size: 1.4rem; margin-bottom: 1rem; text-shadow: 0 0 8px #00ff41;">
+                            🔮 Vision
+                        </h3>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            Event Scout aims to become more than just a scraper—it's designed as a comprehensive event aggregation platform. The system continuously updates a database with the latest events from various sources, making this data accessible through a REST API. This architecture enables multiple use cases: web applications can display curated event lists, chatbots can recommend events based on user preferences, and mobile apps can provide location-based event discovery.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                            By starting with EventBrite and building a scalable, modular foundation, Event Scout can easily expand to include other platforms like Meetup, Facebook Events, and specialized industry sites. The result is a powerful tool that transforms the scattered landscape of event information into a unified, searchable, and programmatically accessible resource.
+                        </p>
+                    </div>
+
+                    <!-- Technical Architecture -->
+                    <div class="blog-section" style="margin: 2rem 0;">
+                        <h3 style="color: #00ff41; font-size: 1.4rem; margin-bottom: 1rem; text-shadow: 0 0 8px #00ff41;">
+                            🏗️ Tech Stack
+                        </h3>
+                        <ul style="color: #ffffff; margin-left: 2rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Python</strong></li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Selenium</strong></li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Event site APIs</strong></li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">postgreSQL</strong></li>
+                        </ul>
+                                   
+                        <h4 style="color: #00ff41;">Data discovery (Python and Selenium):</h4> 
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            Python emerged as the natural choice for Event Scout's foundation due to its unparalleled ecosystem of web scraping libraries. As the most popular language for web scraping, Python offers extensive community support, comprehensive documentation, and a mature collection of tools specifically designed for data extraction tasks.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            Selenium was selected as the primary scraping tool for several strategic reasons. Having gained extensive experience with Selenium through years of automated testing, I possessed the familiarity needed to transition seamlessly into web scraping applications. More importantly, Selenium excels at handling modern, JavaScript-heavy websites—a critical capability for scraping contemporary platforms like EventBrite.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            Traditional HTTP-based scrapers such as requests combined with BeautifulSoup fall short when dealing with dynamic content that loads after the initial page render. These tools cannot execute JavaScript, causing them to miss essential data that appears only through client-side interactions. Selenium addresses this limitation by controlling actual browser instances that execute JavaScript naturally, capturing all dynamically loaded content.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            Additionally, Selenium's use of real browsers creates scraping patterns that appear more human-like, significantly reducing the risk of being blocked by anti-bot detection systems—a crucial advantage for maintaining reliable data collection.
+                        </p>
+
+                        <h4 style="color: #00ff41;">The Hybrid Approach: Maximizing Data Quality and Efficiency</h4> 
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            Event Scout employs a sophisticated hybrid strategy that combines Selenium's navigation capabilities with EventBrite's API for comprehensive data collection. This approach delivers several key advantages:
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong>Comprehensive Coverage:</strong> While EventBrite's API provides reliable data access, it has limitations in discovery scenarios. For instance, the API cannot directly retrieve lists of event IDs with specific geographic or categorical filters that are easily accessible through the web interface.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong>Rich, Structured Data:</strong> Once event IDs are discovered through Selenium, the EventBrite API delivers detailed, structured information that would be difficult and error-prone to extract through HTML parsing alone.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong>Enhanced Reliability:</strong> API responses provide consistent, well-formatted data that remains stable even when the website's HTML structure changes—a common challenge in web scraping.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            <strong>Optimized Rate Limiting:</strong> By using Selenium for initial discovery and the API for detailed data retrieval, the system minimizes API calls while maximizing data accuracy and completeness.
+                        </p>
+
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            Here's how the hybrid approach works in practice:
+                        </p>
+
+                        <div class="code-block" style="background: rgba(0, 20, 40, 0.8); border: 1px solid #00ff41; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace; overflow-x: auto;">
+                            <pre style="margin: 0; color: #ffffff; white-space: pre-wrap;"><code># Selenium discovers events on organizer pages
+event_cards = self.driver.find_elements(By.CLASS_NAME, "event-card")
+for card in event_cards:
+    event_id = card.get_attribute("data-event-id")
+   
+    # API provides rich, structured data
+    event_details = self.eb_fetcher.get_event_by_id(event_id)</code></pre>
+                        </div>
+
+                        <h4 style="color: #00ff41;">Data Management: PostgreSQL for Complex Event Structures</h4>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            PostgreSQL was chosen to handle Event Scout's complex and varied data requirements. Events possess diverse attributes that vary significantly depending on the platform, event type, and organizer preferences. Events can be categorized and subcategorized in numerous ways, with optional attributes including pricing information, age restrictions, accessibility features, and capacity limits.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            PostgreSQL's native JSON and JSONB support provides the flexibility needed to store this variable metadata without constraining the system to rigid schema requirements. This approach allows Event Scout to adapt to new platforms and evolving event data structures without requiring database migrations.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            Beyond flexibility, PostgreSQL offers specialized data types perfectly suited for event management:
+                        </p>
+                        <ul style="color: #ffffff; margin-left: 2rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Timestamp with Time Zone:</strong> Essential for accurately representing event start and end times across different geographic locations.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Geospatial Data Types (PostGIS):</strong> Enables efficient storage and querying of event locations, facilitating location-based searches and recommendations.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #00ff41;">Full-Text Search:</strong> Native search capabilities for event titles and descriptions.</li>
+                        </ul>
+                        <h4 style="color: #00ff41;">Schema Integrity: Balancing Flexibility with Reliability</h4>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            While embracing PostgreSQL's flexible JSON capabilities, Event Scout maintains a well-defined core schema to ensure data integrity and system reliability. This design decision reflects a crucial understanding of web scraping's inherent fragility—websites can change their structure at any moment, potentially breaking scraping operations.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            By establishing a predefined schema for essential event attributes (title, date, location, platform source), the system can detect when scraping operations return unexpected or malformed data. This approach provides early warning when website changes require scraper updates, preventing the accumulation of corrupted data in the database.
+                        </p>
+                        <p style="color: #ffffff; margin-bottom: 1rem;">
+                            The combination of structured core fields with flexible JSON metadata creates a robust foundation that can evolve with changing requirements while maintaining data quality and system reliability. This architecture ensures Event Scout can scale across multiple platforms while preserving the integrity needed for a production-ready event discovery system.
+                        </p>
+                    </div>
+                    <!-- System Architecture  -->
+                    <div class="blog-section" style="margin: 2rem 0;">
+                        <h3 style="color: #00ff41; font-size: 1.4rem; margin-bottom: 1rem; text-shadow: 0 0 8px #00ff41;">
+                            📱 System Architecture 
+                        </h3>
+                        <p style="color: #ffffff; margin-bottom: 1.5rem; font-size: 1rem;">
+                           Although there is a lot more work to be done on this project to get what I totally want, here is a basic class diagram of how I am currently managing the web scraping.
+                        </p>
+
+                        <div class="ascii-diagram" style="background: rgba(0, 20, 40, 0.8); border: 1px solid #00ff41; border-radius: 8px; padding: 2rem; margin: 2rem 0; overflow-x: auto;">
+                            <pre style="color: #00ff41; font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.2; margin: 0; white-space: pre;">
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                           EVENT SCOUT CLASS DIAGRAM                                         │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+     ┌─────────────────────────────┐           ┌─────────────────────────────┐           ┌─────────────────────────────┐
+     │          Scraper            │           │     EventBriteScraper       │           │     EventBriteFetcher       │
+     │         (Base Class)        │           │                             │           │                             │
+     ├─────────────────────────────┤           ├─────────────────────────────┤           ├─────────────────────────────┤
+     │ - base_url: str             │           │ - eb_fetcher: EventBrite... │           │ - headers: dict             │
+     │ - robot_url: str            │           │ - site_map: str             │           │                             │
+     │ - robots_txt: str           │◄──────────┤                             │──────────►│                             │
+     │ - driver: WebDriver         │ inherits  │                             │ contains  │                             │
+     ├─────────────────────────────┤           ├─────────────────────────────┤           ├─────────────────────────────┤
+     │ + __init__(base_url, driver)│           │ + __init__(driver)          │           │ + __init__()                │
+     │ - _init_driver(): WebDriver │           │ - _is_state_acronym(): bool │           │ + search_events(): list     │
+     │ - _is_allowed(): bool       │           │ + get_city_events(): list   │           │ + get_event_by_id(): dict   │
+     │ + load_site(): tuple        │           │ + get_organizer_events():   │           │                             │
+     │ + display_current_url()     │           │   list[Event]               │           │                             │
+     │ + close(): void             │           │                             │           │                             │
+     └─────────────────────────────┘           └─────────────────────────────┘           └─────────────────────────────┘
+                                                              │                                          │
+                                                              │ creates                                  │ creates
+                                                              ▼                                          ▼
+     ┌─────────────────────────────┐           ┌──────────────────────────────────────────────────────────────────────┐
+     │         Constants           │           │                              Event                                   │
+     │        <<utility>>          │           │                         (Data Model)                               │
+     ├─────────────────────────────┤           ├──────────────────────────────────────────────────────────────────────┤
+     │ + EVENTBRITE_CATEGORY_IDS   │           │ + title: str              │ + venue_id: str                        │
+     │   : dict                    │◄──────────┤ + event_id: str           │ + start_time: str                      │
+     │ + EVENTBRITE_SUBCATEGORIES  │   uses    │ + location: str           │ + end_time: str                        │
+     │   : dict                    │           │ + paid_status: str        │ + category_id: str                     │
+     │                             │           │ + category: str           │ + subcategory_id: str                  │
+     │                             │           │ + url: str                │ + category_site_id: str                │
+     │                             │           │ + organizer_id: str       │ + subcategory_site_id: str             │
+     │                             │           │ + summary: str            │ + __init__(...)                        │
+     └─────────────────────────────┘           └──────────────────────────────────────────────────────────────────────┘
+
+LEGEND:
+═══════
+◄────── Inheritance    (EventBriteScraper extends Scraper)
+──────► Composition    (EventBriteScraper contains EventBriteFetcher)
+   │    Dependency     (Classes create Event objects and use Constants)
+   ▼
+
+NOTES:
+══════
+• Scraper: Base class handles WebDriver management, robots.txt compliance, and common navigation
+• EventBriteScraper: Hybrid approach using Selenium for discovery and API for detailed data
+• EventBriteFetcher: API-only class for authentication and structured data retrieval
+• Event: Data model with comprehensive event information
+• Constants: Utility class for category mappings and configuration
+                            </pre>
+                        </div>
+
+                        
+                            <h4 style="color: #00ff41; margin-bottom: 1rem; font-size: 1.1rem;">Key Relationships:</h4>
+                        <ol style="color: #ffffff; margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                            <li style="margin-bottom: 1rem;">
+                                <strong style="color: #00ff41;">Inheritance:</strong> EventBriteScraper extends Scraper to inherit common web scraping functionality. In the future I plan on scraping other event platforms. I figured that having a base class for handling the shared functionality between all event scrapers will help build quicker and more consistent scrapers.
+                            </li>
+                            <li style="margin-bottom: 1rem;">
+                                <strong style="color: #00ff41;">Composition:</strong> EventBriteScraper contains an EventBriteFetch instance for API operations
+                            </li>
+                            <li style="margin-bottom: 1rem;">
+                                <strong style="color: #00ff41;">Dependency:</strong> Both scraper classes create Event objects and use the constants for data mapping
+                            </li>
+                            <li style="margin-bottom: 1rem;">
+                                <strong style="color: #00ff41;">Separation of concerns:</strong>
+                                <ul style="margin: 0.5rem 0 0 1rem; padding-left: 1rem;">
+                                    <li style="margin-bottom: 0.5rem;"><strong>Scraper:</strong> Browser automation and navigation</li>
+                                    <li style="margin-bottom: 0.5rem;"><strong>EventBriteFetcher:</strong> API communication</li>
+                                    <li style="margin-bottom: 0.5rem;"><strong>Event:</strong> Data Model</li>
+                                    <li style="margin-bottom: 0.5rem;"><strong>Constants:</strong> Configuration and mappings</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        
+                            <p style="color: #ffffff; margin-bottom: 1.5rem; line-height: 1.6;">
+                                This architecture allows you to easily add new platforms (like <code style="background: rgba(0, 255, 65, 0.2); padding: 0.2rem 0.4rem; border-radius: 3px; color: #00ff41;">meetupScraper</code>) by extending the base scraper class while maintaining clean separation between web scraping and API operations.
+                            </p>
+                            
+                            <p style="color: #ffffff; margin-bottom: 1.5rem; line-height: 1.6;">
+                                Here is a partial example of the base scraper class. The base <strong style="color: #00ff41;">Scraper</strong> class serves as the foundation for all platform-specific scrapers in Event Scout, encapsulating the core functionality and attributes that every scraper requires. This class manages four essential components: the base URL of the target website, the robots.txt URL for compliance checking, the cached content of the robots.txt file, and the Selenium WebDriver instance.
+                            </p>
+                            
+                            <p style="color: #ffffff; margin-bottom: 1.5rem; line-height: 1.6;">
+                                The class implements several critical methods that ensure reliable and ethical scraping operations:
+                            </p>
+
+                            <div class="method-details" style="margin: 1.5rem 0; padding-left: 1rem;">
+                                <div style="margin-bottom: 1rem;">
+                                    <strong style="color: #00ff41; font-family: 'Courier New', monospace;">_init_driver()</strong> 
+                                    <span style="color: #ffffff; margin-left: 0.5rem;">- Initializes and configures the Selenium WebDriver, which serves as the browser automation engine. This method handles driver setup, browser options, and establishes the initial connection to the target website.</span>
+                                </div>
+                                
+                                <div style="margin-bottom: 1rem;">
+                                    <strong style="color: #00ff41; font-family: 'Courier New', monospace;">_is_allowed()</strong> 
+                                    <span style="color: #ffffff; margin-left: 0.5rem;">- A private method that enforces responsible scraping practices by checking the website's robots.txt file before accessing any resource. This method parses the robots.txt content to determine whether a specific URL path is permitted for automated access, ensuring compliance with the website's scraping policies.</span>
+                                </div>
+                                
+                                <div style="margin-bottom: 1rem;">
+                                    <strong style="color: #00ff41; font-family: 'Courier New', monospace;">close()</strong> 
+                                    <span style="color: #ffffff; margin-left: 0.5rem;">- Properly terminates the WebDriver session and releases system resources. This method is crucial for preventing memory leaks and system crashes—a lesson learned through experience when running multiple scraping operations simultaneously.</span>
+                                </div>
+                            </div>
+
+                            <div class="code-block" style="background: rgba(0, 20, 40, 0.8); border: 1px solid #00ff41; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace; overflow-x: auto;">
+                                <pre style="margin: 0; color: #ffffff; white-space: pre-wrap;"><code>class Scraper:
+    def __init__(self, base_url: str, driver: str="chrome"):
+        # options = Options()
+        # options.add_argument("--no-sandbox")
+        self.base_url = base_url
+        self.robot_url = f"{self.base_url}/robots.txt"
+        self.robots_txt = ""
+        self.driver = self._init_driver(driver)
+
+
+    """*********************PRIVATE*********************"""
+    def _init_driver(self, driver: str) -> WebDriver | None:
+        try:
+            driver_dict = {
+                "chrome": webdriver.Chrome()
+            }
+            driver = driver_dict.get(driver)
+            if not driver:
+                raise ValueError(DRIVER_UNDEFINED)
+            driver.get(self.base_url)
+            return driver
+        except ValueError as e:
+            print(f"Error while attempting to start driver: {e}")
+            return None</code></pre>
+                            </div>
+
+                            <h4 style="color: #00ff41; margin: 2rem 0 1rem 0; font-size: 1.1rem;">EventBrite Scraper Implementation</h4>
+                            <p style="color: #ffffff; margin-bottom: 1.5rem; line-height: 1.6;">
+                                The EventBrite Scraper inherits from the base Scraper class and initializes the API fetcher component, demonstrating the clean inheritance pattern and composition relationship shown in our class diagram:
+                            </p>
+
+                            <div class="code-block" style="background: rgba(0, 20, 40, 0.8); border: 1px solid #00ff41; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace; overflow-x: auto;">
+                                <pre style="margin: 0; color: #ffffff; white-space: pre-wrap;"><code>class EventBriteScraper(Scraper):
+    def __init__(self, base_url="https://www.eventbrite.com", driver: str = "chrome"):
+        super().__init__(base_url, driver)
+        self.eb_fetcher = EventBriteFetcher()</code></pre>
+                            </div>
+
+                            <p style="color: #ffffff; margin-bottom: 2rem; line-height: 1.6;">
+                                This implementation showcases several key architectural principles: it inherits all the WebDriver management and robots.txt compliance from the base class through <code style="background: rgba(0, 255, 65, 0.2); padding: 0.2rem 0.4rem; border-radius: 3px; color: #00ff41;">super().__init__()</code>, while adding platform-specific functionality by initializing its own <code style="background: rgba(0, 255, 65, 0.2); padding: 0.2rem 0.4rem; border-radius: 3px; color: #00ff41;">EventBriteFetcher</code> instance for API operations.
+                            </p>
+
+                            <p style="color: #ffffff; margin-bottom: 0; line-height: 1.6;">
+                                By centralizing these common operations in the base class, Event Scout maintains consistent behavior across all platform-specific scrapers while promoting ethical scraping practices and robust resource management. This architecture ensures that adding new platforms requires minimal setup while maintaining the same standards of reliability and compliance.
+                            </p>
+                     
+                      
+                    <!-- Call to Action -->
+                    <div class="blog-cta" style="margin: 2rem 0; padding: 1.5rem; border: 2px solid #00ff41; border-radius: 4px; text-align: center; background: rgba(0, 255, 65, 0.05);">
+                        <p style="color: #00ff41; margin-bottom: 1rem; font-weight: bold;">
+                            More to come soon!
+                        </p>
+                        <p style="color: #ffffff; margin: 0; font-size: 0.9rem;">
+                            Reach out to discuss the technical implementation details!
+                        </p>
+                    </div>
+               
                 </div>
+
                 
                 <div class="post-footer">
                     <a href="/blog.html" class="back-to-blog" style="font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace; color: #00ff41; text-decoration: none; font-weight: bold; text-shadow: 0 0 5px #00ff41;">← Back to Development Blog</a>
                 </div>
             </div>
+
+
         </section>
     </main>
 

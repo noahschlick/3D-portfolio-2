@@ -15,6 +15,24 @@ function closeMobileMenu() {
     hamburger.classList.remove('active');
 }
 
+// Make functions globally available
+window.toggleMobileMenu = toggleMobileMenu;
+window.closeMobileMenu = closeMobileMenu;
+
+// Also add event listener approach as backup
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    if (hamburger) {
+        hamburger.addEventListener('click', toggleMobileMenu);
+    }
+    
+    // Add event listeners to nav links for closing
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+});
+
 // Close menu when clicking outside
 document.addEventListener('click', function(event) {
     const nav = document.querySelector('.nav');
